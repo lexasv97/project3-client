@@ -1,4 +1,3 @@
-import './App.css'
 
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
@@ -8,14 +7,23 @@ import SignupPage from './pages/SignupPage'
 import HomePage from './pages/HomePage'
 import ProfilePage from './pages/UserProfile'
 import BusinessProfile from './pages/BusinessProfile'
-import { useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { AuthContext } from './context/auth.context'
 import AllCategories from './pages/AllCategories'
+import { RotatingLines } from 'react-loader-spinner'
 
 
 function App() {
 
   const { user, isLoggedIn } = useContext(AuthContext)
+
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
+  }, [])
 
   // const getBusinessStatus = () => {
   //   return localStorage.getItem('isBusiness')
@@ -39,43 +47,57 @@ function App() {
   }
 
   return (
-    <div>
-      <Navbar />
+    <>
+      {
+        loading ?
+          <div className="bg-indigo-50 h-screen flex flex-col justify-center items-center">
+            <RotatingLines
+              height={100}
+              width={100}
+              radius={5}
+              color="#6fc727"
+              visible={true}
+            />
+          </div>
+          : <div>
+            <Navbar />
 
-      <Routes>
-        <Route path='/' element={<HomePage />} />
+            <Routes>
+              <Route path='/' element={<HomePage />} />
 
-        <Route element={<NotLoggedIn />}>
+              <Route element={<NotLoggedIn />}>
 
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/signup' element={<SignupPage />} />
+                <Route path='/login' element={<LoginPage />} />
+                <Route path='/signup' element={<SignupPage />} />
 
-        </Route>
+              </Route>
 
-        <Route element={<LoggedIn />}>
+              <Route element={<LoggedIn />}>
 
-          <Route path='/logout' />
+                <Route path='/logout' />
 
-        </Route>
+              </Route>
 
-        {/* <Route element={<IsUser />}> */}
+              <Route element={<IsUser />}>
 
-          <Route path='/user-profile' element={<ProfilePage />} />
+                <Route path='/user-profile' element={<ProfilePage />} />
 
-        {/* </Route>
+              </Route>
 
-        <Route element={<IsBusiness />}> */}
+              {/* <Route element={<IsBusiness />}>  */}
 
-          <Route path='/business-profile' element={<BusinessProfile />} />
+              <Route path='/business-profile' element={<BusinessProfile />} />
 
-        {/* </Route> */}
+              {/* </Route> */}
 
-        <Route path='/all-categories' element={<AllCategories />} />
+              <Route path='/all-categories' element={<AllCategories />} />
 
-      </Routes>
+            </Routes>
 
-      <Footer />
-    </div>
+            <Footer />
+          </div>
+      }
+    </>
   )
 }
 

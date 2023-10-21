@@ -5,6 +5,10 @@ import { AuthContext } from "../context/auth.context";
 
 import { post } from "../services/authService";
 
+import { AiOutlineUnlock } from "react-icons/ai";
+import { BiUser } from "react-icons/bi";
+import { MdOutlineAlternateEmail } from "react-icons/md";
+
 const UserSignup = () => {
 
   const [email, setEmail] = useState("");
@@ -48,51 +52,71 @@ const UserSignup = () => {
   }
 
   return (
-    <div>
-      <h1>Sign up</h1>
+    <div className="flex flex-col justify-center items-center h-screen">
+      <div className="flex flex-col items-center justify-center p-20 bg-indigo-50 border border-slate-600 rounded-3xl">
+        <span className="text-3xl font-bold">Register</span>
 
-      <form onSubmit={handleSignupSubmit}>
+        <form className="flex flex-col items-center justify-center" onSubmit={handleSignupSubmit}>
 
-        <label>Name:</label>
-        <input
-          type="text"
-          name="name"
-          value={name}
-          onChange={handleName}
-        />
+          <div className="my-4 flex flex-row justify-between">
+            <input className="block w-11/12 py-2.5 px-0 text-sm text-gray-900 border border-slate-600 rounded-2xl appearance-none focus:outline-none focus:ring-0 focus:text-white focus:border-blue-600 peer"
+              placeholder="name"
+              type="text"
+              name="name"
+              value={name}
+              onChange={handleName} />
+            <div>
+              <BiUser className='text-slate-400' />
+            </div>
+          </div>
 
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleEmail}
-        />
+          <div className="my-4 flex flex-row justify-between">
+            <input className="block w-11/12 py-2.5 px-0 text-sm text-gray-900 border border-slate-600 rounded-2xl appearance-none focus:outline-none focus:ring-0 focus:text-white focus:border-blue-600 peer"
+              placeholder="email"
+              type="email"
+              name="email"
+              value={email}
+              onChange={handleEmail} />
+            <div>
+              <MdOutlineAlternateEmail className='text-slate-400' />
+            </div>
+          </div>
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
+          <div className="my-4 flex flex-row justify-between">
+            <input className="block w-11/12 py-2.5 px-0 text-sm text-gray-900 border border-slate-600 rounded-2xl appearance-none focus:outline-none focus:ring-0 focus:text-white focus:border-blue-600 peer"
+              placeholder="password"
+              type="password"
+              name="password"
+              value={password}
+              onChange={handlePassword} />
+            <div>
+              <AiOutlineUnlock className='text-slate-400' />
+            </div>
+          </div>
 
-        <label>Business?
-          <input
-            type='checkbox'
-            name='isBusiness'
-            checked={isBusiness}
-            onChange={handleToggle}
-          />
-        </label>
-        <button type="submit">Sign Up</button>
-      </form>
+          <div className="my-4 flex flex-row justify-evenly">
+            <input className=""
+              placeholder="YourName"
+              type="checkbox"
+              name="isBusiness"
+              value={isBusiness}
+              onChange={handleToggle} />
+            <label> Business</label>
+          </div>
+          <div className="flex justify-center w-1/2 py-2 my-2 border border-slate-600 rounded-3xl bg-lime-400">
+            <button type="submit">Sign Up</button>
+          </div>
+          <div className="my-4">
+            <span>Already have account?
+              <Link to="/login"> <span className="text-blue-500"> Login</span></Link>
+            </span>
+          </div>
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+          {errorMessage && <p className="block pb-5 error-message">{errorMessage}</p>}
 
-      <p>Already have account?
-        <Link to="/login"> Login</Link>
-      </p>
+        </form>
+
+      </div>
     </div>
   )
 }

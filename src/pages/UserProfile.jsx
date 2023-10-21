@@ -4,7 +4,7 @@ import { useContext } from "react"
 
 const UserProfile = () => {
 
-    const { user } = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
 
     return (
         <div>
@@ -15,7 +15,11 @@ const UserProfile = () => {
                 <div>
                     <h2>Welcome, {user.name}!</h2>
                     <img src={user.profileImage} alt="profileImage" />
+
+                    <button onClick={logOut}>logout</button>
                 </div>
+
+                
                 
             }
 

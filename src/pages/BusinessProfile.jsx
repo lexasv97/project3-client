@@ -2,7 +2,8 @@ import { AuthContext } from "../context/auth.context"
 import { useContext } from "react"
 
 const BusinessProfile = () => {
-    const { user } = useContext(AuthContext)
+    
+    const { user, logOut } = useContext(AuthContext)
 
     return (
         <div>
@@ -13,6 +14,7 @@ const BusinessProfile = () => {
                 <div>
                     <h2>Welcome, {user.name}!</h2>
                     <img src={user.profileImage} alt="profileImage" />
+                    <button onClick={logOut}>logout</button>
                 </div>
             }
 
