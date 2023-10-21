@@ -3,43 +3,40 @@ import './App.css'
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom'
-import UserLogin from './pages/UserLogin'
-import UserSignup from './pages/UserSignup'
+import LoginPage from './pages/LoginPage'
+import SignupPage from './pages/SignupPage'
 import HomePage from './pages/HomePage'
-import UserProfile from './pages/UserProfile'
+import ProfilePage from './pages/UserProfile'
+import BusinessProfile from './pages/BusinessProfile'
 import { useContext } from 'react'
 import { AuthContext } from './context/auth.context'
-import BusinessProfile from './pages/BusinessProfile'
-import BusinessLogin from './pages/BusinessLogin'
-import BusinessSignup from './pages/BusinessSignup'
 import AllCategories from './pages/AllCategories'
 
 
 function App() {
 
-  const { user } = useContext(AuthContext)
+  const { user, isLoggedIn } = useContext(AuthContext)
 
-  const getUserStatus = () => {
-    return localStorage.getItem('isUser')
-  }
-
-  const getBusinessStatus = () => {
-    return localStorage.getItem('isBusiness')
-  }
+  // const getBusinessStatus = () => {
+  //   return localStorage.getItem('isBusiness')
+  // }
   const IsUser = () => {
-    return getUserStatus() ? <Outlet /> : <Navigate to='/' />
+    return user.isBusiness ? <Navigate to='/' /> : <Outlet />
   }
 
-  const IsBusiness = () => {
-    return getBusinessStatus() ? <Outlet /> : <Navigate to='/' />
+  // const IsBusiness = () => {
+  //   return !user.isBusiness ? <Outlet /> : <Navigate to='/' />
+  // }
+  // const getToken = () => {
+  //   return localStorage.getItem('authToken')
+  // }
+  const LoggedIn = () => {
+    return isLoggedIn ? <Outlet /> : <Navigate to='/login' />
   }
-  // const LoggedIn = () => {
-  //   return getToken() ? <Outlet /> : <Navigate to='/login' />
-  // }
 
-  // const NotLoggedIn = () => {
-  //   return !getToken() ? <Outlet /> : <Navigate to='/' />
-  // }
+  const NotLoggedIn = () => {
+    return !isLoggedIn ? <Outlet /> : <Navigate to='/' />
+  }
 
   return (
     <div>
@@ -48,29 +45,30 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage />} />
 
-        {/* <Route element={<NotLoggedIn />}> */}
+        <Route element={<NotLoggedIn />}>
 
-        <Route path='/user-login' element={<UserLogin />} />
-        <Route path='/user-signup' element={<UserSignup />} />
-
-        {/* </Route> */}
-
-        {/* <Route path='/logout' /> */}
-
-        <Route path='/business-login' element={<BusinessLogin />} />
-        <Route path='/business-signup' element={<BusinessSignup />} />
-
-        <Route element={<IsUser />}>
-
-          <Route path='/user-profile' element={<UserProfile />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/signup' element={<SignupPage />} />
 
         </Route>
 
-        <Route element={<IsBusiness />}>
+        <Route element={<LoggedIn />}>
+
+          <Route path='/logout' />
+
+        </Route>
+
+        {/* <Route element={<IsUser />}> */}
+
+          <Route path='/user-profile' element={<ProfilePage />} />
+
+        {/* </Route>
+
+        <Route element={<IsBusiness />}> */}
 
           <Route path='/business-profile' element={<BusinessProfile />} />
 
-        </Route>
+        {/* </Route> */}
 
         <Route path='/all-categories' element={<AllCategories />} />
 

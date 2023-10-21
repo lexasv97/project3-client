@@ -1,15 +1,33 @@
 import { Link, NavLink } from "react-router-dom"
 import hamburgerIcon from '../assets/Hamburger_icon.png'
+import { useNavigate } from "react-router-dom"
+import { AuthContext } from "../context/auth.context";
+import { useContext } from "react";
+//import './navbar.css'
 
 const Navbar = () => {
 
-  const getUserStatus = () => {
-    return localStorage.getItem('isUser')
-  }
+  const { isLoggedIn, user } = useContext(AuthContext);
 
-  const getBusinessStatus = () => {
-    return localStorage.getItem('isBusiness')
-  }
+  const navigate = useNavigate()
+
+  // const getToken = () => {
+  //   return localStorage.getItem('authToken')
+  // }
+
+  // const getBusinessStatus = () => {
+  //   return localStorage.getItem('isBusiness')
+  // }
+
+  // const businessStatus = getBusinessStatus();
+
+
+
+  const logout = () => {
+    localStorage.clear()
+    // setIsLoggedin(false);
+    navigate('/')
+  };
 
   return (
     <nav>
@@ -17,15 +35,27 @@ const Navbar = () => {
       <NavLink to='/side-menu'>
         <img src={hamburgerIcon} alt='hamburger' />
       </NavLink>
-      
-      <Link to='/'>Home</Link>
-      
-      <Link to='/user-login'>Login</Link>
 
-      <Link to='/business-login'>Creator</Link>
+      <Link to='/'>Home</Link>
 
       {
-        getUserStatus() && <Link to='/user-profile'>Profile</Link>
+        !isLoggedIn && <Link to='/login'>Login</Link>
+      }
+
+
+      {user && <div>
+        {
+          !user.isBusiness && <Link to='/user-profile'>Profile</Link>
+        }
+
+        {
+          user.isBusiness && <Link to='/business-profile'>Profile</Link>
+        }
+      </div>}
+
+
+      {
+        isLoggedIn && <button onClick={logout}>logout</button>
       }
 
       <hr />

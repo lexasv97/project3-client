@@ -1,4 +1,3 @@
-// src/context/auth.context.jsx
 
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +7,7 @@ import { get } from "../services/authService";
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
-    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [user, setUser] = useState(null);
 
@@ -35,14 +34,16 @@ function AuthProvider({ children }) {
                     // If the server verifies that the JWT token is valid  
                     const user = response.data;
                     console.log('USER =====>', user)
-                    if (user.isUser) {
-                      localStorage.setItem('isUser', true)
-                    }
-                    if (user.isBusiness) {
-                      localStorage.setItem('isBusiness', true)
-                    }
+                    // if (user.isUser) {
+                    //   localStorage.setItem('isUser', true)
+                    // }
+                    // if (user.isBusiness === true) {
+                    //   localStorage.setItem('isBusiness', true)
+                    // } else {
+                    //   localStorage.setItem('isBusiness', false)
+                    // }
                     // Update state variables        
-                    setIsUserLoggedIn(true);
+                    setIsLoggedIn(true);
                     setIsLoading(false);
                     setUser(user);
                 })
@@ -50,19 +51,19 @@ function AuthProvider({ children }) {
                     // If the server sends an error response (invalid token) 
                     // Update state variables 
                     removeToken()
-                    setIsUserLoggedIn(false);
+                    setIsLoggedIn(false);
                     setIsLoading(false);
                     setUser(null);
                 });
         } else {
             // If the token is not available (or is removed)
-            setIsUserLoggedIn(false);
+            setIsLoggedIn(false);
             setIsLoading(false);
             setUser(null);
         }
     }
 
-    const logOutUser = () => {
+    const logOut = () => {
         navigate('/')
         // <== ADD    
         // To log out the user, remove the token
@@ -83,7 +84,7 @@ function AuthProvider({ children }) {
     */
 
     return (
-        <AuthContext.Provider value={{ isUserLoggedIn, isLoading, user, storeToken, authenticateUser, logOutUser }}>
+        <AuthContext.Provider value={{ isLoggedIn, isLoading, user, storeToken, authenticateUser, logOut }}>
             {children}
         </AuthContext.Provider>
     )

@@ -22,7 +22,7 @@ const UserLogin = () => {
     e.preventDefault();
     const requestBody = { email, password };
 
-    post('/user-auth/login', requestBody)
+    post('/auth/login', requestBody)
       .then((response) => {
         // Request to the server's endpoint `/auth/login` returns a response
         // with the JWT string ->  response.data.authToken
@@ -30,7 +30,7 @@ const UserLogin = () => {
        console.log("DATA =====>", response.data)
         storeToken(response.data.authToken)
         authenticateUser()
-        navigate('/user-profile');                             
+        navigate('/');                             
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
@@ -63,8 +63,9 @@ const UserLogin = () => {
       </form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-      <p>Don't have an account yet?</p>
-      <Link to="/user-signup"> Sign Up</Link>
+      <p>Don't have an account yet?
+      <Link to="/signup"> Sign Up</Link>
+      </p>
     </div>
   )
 }

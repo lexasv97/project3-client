@@ -1,23 +1,23 @@
-import { Link } from "react-router-dom"
 import { AuthContext } from "../context/auth.context"
 import { useContext } from "react"
 
-const UserProfile = () => {
-
-    const { business } = useContext(AuthContext) // DOESN'T WORK YET
+const BusinessProfile = () => {
+    const { user } = useContext(AuthContext)
 
     return (
         <div>
-            <h1>Profile</h1>
+            <h1>Business profile</h1>
 
             {
-                business &&
-
-                <h2>Welcom, {business.name}!</h2>
+                user &&
+                <div>
+                    <h2>Welcome, {user.name}!</h2>
+                    <img src={user.profileImage} alt="profileImage" />
+                </div>
             }
 
         </div>
     )
 }
 
-export default UserProfile
+export default BusinessProfile

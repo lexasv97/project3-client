@@ -5,15 +5,16 @@ import { AuthContext } from "../context/auth.context";
 
 import { post } from "../services/authService";
 
-const BusinessSignup = () => {
+const UserSignup = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [isBusiness, setIsBusiness] = useState(false)
 
   const [errorMessage, setErrorMessage] = useState(undefined);
 
-  const { authenticateBusiness, storeToken } = useContext(AuthContext)
+  const { authenticateUser, storeToken } = useContext(AuthContext)
 
   const navigate = useNavigate();
 
@@ -21,34 +22,38 @@ const BusinessSignup = () => {
   const handlePassword = (e) => setPassword(e.target.value);
   const handleName = (e) => setName(e.target.value);
 
+  const handleToggle = (e) => {
+    setIsBusiness(!isBusiness)
+  }
+
   const handleSignupSubmit = (e) => {
     e.preventDefault();
-        // Create an object representing the request body
-        const requestBody = { email, password, name };
+    // Create an object representing the request body
+    const requestBody = { email, password, name, isBusiness };
 
-        // Make an axios request to the API
-        // If the POST request is a successful redirect to the login page
-        // If the request resolves with an error, set the error message in the state
-        post('/user-auth/signup', requestBody)
-            .then((response) => {
-                console.log("Created user ===>", response.data)
-                storeToken(response.data.authToken)
-                authenticateBusiness()
-                navigate('/business-profile');
-            })
-            .catch((error) => {
-                const errorDescription = error.response.data.message;
-                setErrorMessage(errorDescription);
-            })
+    // Make an axios request to the API
+    // If the POST request is a successful redirect to the login page
+    // If the request resolves with an error, set the error message in the state
+    post('/auth/signup', requestBody)
+      .then((response) => {
+        console.log("Created user ===>", response.data)
+        storeToken(response.data.authToken)
+        authenticateUser()
+        navigate('/');
+      })
+      .catch((error) => {
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
+      })
   }
 
   return (
     <div>
-      <h1>Business sign up</h1>
+      <h1>Sign up</h1>
 
       <form onSubmit={handleSignupSubmit}>
 
-      <label>Name:</label>
+        <label>Name:</label>
         <input
           type="text"
           name="name"
@@ -72,15 +77,24 @@ const BusinessSignup = () => {
           onChange={handlePassword}
         />
 
+        <label>Business?
+          <input
+            type='checkbox'
+            name='isBusiness'
+            checked={isBusiness}
+            onChange={handleToggle}
+          />
+        </label>
         <button type="submit">Sign Up</button>
       </form>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-      <p>Already have account?</p>
-      <Link to="/business-login"> Login</Link>
+      <p>Already have account?
+        <Link to="/login"> Login</Link>
+      </p>
     </div>
   )
 }
 
-export default BusinessSignup
+export default UserSignup

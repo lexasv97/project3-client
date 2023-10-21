@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+
 import { AuthContext } from "../context/auth.context"
 import { useContext } from "react"
 
@@ -8,12 +8,15 @@ const UserProfile = () => {
 
     return (
         <div>
-            <h1>Profile</h1>
+            <h1>User profile</h1>
 
             {
                 user &&
-
-                <h2>Welcom, {user.name}!</h2>
+                <div>
+                    <h2>Welcome, {user.name}!</h2>
+                    <img src={user.profileImage} alt="profileImage" />
+                </div>
+                
             }
 
         </div>
