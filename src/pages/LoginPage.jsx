@@ -40,51 +40,50 @@ const UserLogin = () => {
         setErrorMessage(errorDescription);
       })
   };
-
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
-      <div className="flex flex-col items-center justify-center p-20 bg-indigo-50 border border-slate-600 rounded-3xl">
-        <span className="text-3xl font-bold">Login</span>
+    <div style={{height:'70vh'}} className="flex flex-col justify-center items-center">
+      <div className="flex flex-col items-center justify-center w-1/2 bg-indigo-200 border border-slate-600 rounded-3xl">
+        <span className="text-3xl font-bold my-3">Login</span>
 
-        <form className="flex flex-col items-center justify-center" onSubmit={handleLoginSubmit}>
+        <form onSubmit={handleLoginSubmit} className="flex flex-col items-center justify-center">
 
-          <div className="my-4 flex flex-row justify-between">
-            <input className="block w-11/12 py-2.5 px-0 text-sm text-gray-900 border border-slate-600 rounded-2xl appearance-none focus:outline-none focus:ring-0 focus:text-white focus:border-blue-600 peer"
-            placeholder="email"
+          <div className="flex items-center justify-center my-2 justify-evenly w-full">
+            <input className="w-11/12 border border-slate-600 py-2 rounded-3xl"
+              placeholder="  email"
               type="email"
               name="email"
               value={email}
               onChange={handleEmail}
             />
             <div>
-              <MdOutlineAlternateEmail className='text-slate-400' />
+              <MdOutlineAlternateEmail className='text-black' />
             </div>
           </div>
 
-          <div className="my-4 flex flex-row justify-between">
-            <input className="block w-11/12 py-2.5 px-0 text-sm text-gray-900 border border-slate-600 rounded-2xl appearance-none focus:outline-none focus:ring-0 focus:text-white focus:border-blue-600 peer"
-            placeholder="password"
+          <div className="flex items-center justify-center my-2 justify-evenly w-full">
+            <input className="w-11/12 border border-slate-600 py-2 rounded-3xl"
+              placeholder="  password"
               type="password"
               name="password"
               value={password}
               onChange={handlePassword}
             />
             <div>
-              <AiOutlineUnlock className='text-slate-400' />
+              <AiOutlineUnlock className='text-black' />
             </div>
           </div>
 
-          <div className="flex justify-center w-1/2 py-2 my-2 border border-slate-600 rounded-3xl bg-lime-400">
-            <button type="submit">Login</button>
+          <div className="bg-amber-500 text-white flex justify-center w-1/2 py-2 my-2 border border-slate-600 rounded-3xl">
+            <button type="submit"><span className="hover:text-black transition cursor-pointer">Login</span></button>
           </div>
 
           <div className="my-4">
             <span>Don't have an account yet?
-              <Link to="/signup"> <span className="text-sky-400">Sign Up</span></Link>
+              <Link to="/signup"> <span className="font-bold border-b-2 border-black hover:text-white hover:border-white transition cursor-pointer">Sign Up</span></Link>
             </span>
           </div>
 
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
+          {errorMessage && <p className="error-message mb-2">{errorMessage}</p>}
 
         </form>
 

@@ -52,72 +52,79 @@ const UserSignup = () => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
-      <div className="flex flex-col items-center justify-center p-20 bg-indigo-50 border border-slate-600 rounded-3xl">
-        <span className="text-3xl font-bold">Register</span>
 
-        <form className="flex flex-col items-center justify-center" onSubmit={handleSignupSubmit}>
+    <div style={{height:'70vh'}} className="flex flex-col justify-center items-center">
+      <div className="flex flex-col items-center justify-center w-1/2 bg-indigo-200 border border-slate-600 rounded-3xl">
+        <span className="text-3xl font-bold my-3">Register</span>
 
-          <div className="my-4 flex flex-row justify-between">
-            <input className="block w-11/12 py-2.5 px-0 text-sm text-gray-900 border border-slate-600 rounded-2xl appearance-none focus:outline-none focus:ring-0 focus:text-white focus:border-blue-600 peer"
-              placeholder="name"
-              type="text"
+        <form onSubmit={handleSignupSubmit} className="flex flex-col items-center justify-center">
+
+          <div className="flex items-center justify-center my-2 justify-evenly w-full">
+            <input className="w-11/12 border border-slate-600 py-2 rounded-3xl"
+              placeholder="  name"
+              type="name"
               name="name"
               value={name}
-              onChange={handleName} />
+              onChange={handleName}
+            />
             <div>
-              <BiUser className='text-slate-400' />
+              <BiUser className='text-black' />
             </div>
           </div>
 
-          <div className="my-4 flex flex-row justify-between">
-            <input className="block w-11/12 py-2.5 px-0 text-sm text-gray-900 border border-slate-600 rounded-2xl appearance-none focus:outline-none focus:ring-0 focus:text-white focus:border-blue-600 peer"
-              placeholder="email"
+          <div className="flex items-center justify-center my-2 justify-evenly w-full">
+            <input className="w-full border border-slate-600 py-2 rounded-3xl"
+              placeholder="  email"
               type="email"
               name="email"
               value={email}
-              onChange={handleEmail} />
+              onChange={handleEmail}
+            />
             <div>
-              <MdOutlineAlternateEmail className='text-slate-400' />
+              <MdOutlineAlternateEmail className='text-black' />
             </div>
           </div>
 
-          <div className="my-4 flex flex-row justify-between">
-            <input className="block w-11/12 py-2.5 px-0 text-sm text-gray-900 border border-slate-600 rounded-2xl appearance-none focus:outline-none focus:ring-0 focus:text-white focus:border-blue-600 peer"
-              placeholder="password"
+          <div className="flex items-center justify-center my-2 justify-evenly w-full">
+            <input className="w-11/12 border border-slate-600 py-2 rounded-3xl"
+              placeholder="  password"
               type="password"
               name="password"
               value={password}
-              onChange={handlePassword} />
+              onChange={handlePassword}
+            />
             <div>
-              <AiOutlineUnlock className='text-slate-400' />
+              <AiOutlineUnlock className='text-black' />
             </div>
           </div>
 
           <div className="my-4 flex flex-row justify-evenly">
-            <input className=""
-              placeholder="YourName"
+            <input
               type="checkbox"
               name="isBusiness"
               value={isBusiness}
               onChange={handleToggle} />
             <label> Business</label>
           </div>
-          <div className="flex justify-center w-1/2 py-2 my-2 border border-slate-600 rounded-3xl bg-lime-400">
-            <button type="submit">Sign Up</button>
+
+          <div className="bg-amber-500 text-white flex justify-center w-1/2 py-2 my-2 border border-slate-600 rounded-3xl">
+            <button type="submit"><span className="hover:text-black transition cursor-pointer">Signup</span></button>
           </div>
+
           <div className="my-4">
             <span>Already have account?
-              <Link to="/login"> <span className="text-blue-500"> Login</span></Link>
+              <Link to="/login"> <span className="font-bold border-b-2 border-black hover:text-white hover:border-white transition cursor-pointer">Login</span></Link>
             </span>
           </div>
 
-          {errorMessage && <p className="block pb-5 error-message">{errorMessage}</p>}
+          {errorMessage && <p className="error-message mb-2">{errorMessage}</p>}
 
         </form>
 
       </div>
     </div>
+
+
   )
 }
 

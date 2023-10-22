@@ -11,9 +11,35 @@ import { useState, useEffect, useContext } from 'react'
 import { AuthContext } from './context/auth.context'
 import AllCategories from './pages/AllCategories'
 import { RotatingLines } from 'react-loader-spinner'
-
+import AddService from './pages/AddService'
+import AddItem from './pages/AddItem'
+import ServiceDetails from './pages/ServiceDetails'
+import { get } from './services/authService'
 
 function App() {
+
+  const [allServices, setAllServices] = useState([])
+
+  const getAllServices = () => {
+    get('/services')
+    .then((response) => {
+      console.log("Services ==>", response.data)
+      setAllServices(response.data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
+  useEffect(() => {
+    getAllServices()
+  }, [])
+
+  const updateServices = (newService) => {
+
+    let newArray = [...allServices, newService]
+    setAllServices(newArray)
+  }
 
   const { user, isLoggedIn } = useContext(AuthContext)
 
@@ -55,15 +81,16 @@ function App() {
               height={100}
               width={100}
               radius={5}
-              color="#6fc727"
+              color="#f59e0b"
               visible={true}
             />
           </div>
-          : <div>
+          :
+          <div>
             <Navbar />
 
             <Routes>
-              <Route path='/' element={<HomePage />} />
+              <Route path='/' element={<HomePage allServices={allServices} />} />
 
               <Route element={<NotLoggedIn />}>
 
@@ -90,7 +117,13 @@ function App() {
 
               {/* </Route> */}
 
-              <Route path='/all-categories' element={<AllCategories />} />
+              <Route path='/all-categories' element={<AllCategories allServices={allServices} />} />
+
+              <Route path='/add-service' element={<AddService allServices={getAllServices} updateServices={updateServices} />} />
+
+              <Route path='/add-item' element={<AddItem />} />
+
+              <Route path='/services/:serviceId' element={<ServiceDetails allServices={allServices} />} />
 
             </Routes>
 

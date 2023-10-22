@@ -23,15 +23,13 @@ const Navbar = () => {
   // const businessStatus = getBusinessStatus();
 
   const content = <>
-    <div className="flex flex-col justify-between items-center lg:hidden block absolute top-12 h-screen w-9/12 left-0 right-0 bg-gradient-to-t from-white to-indigo-200 transition border border-slate-800">
-      <ul className="text-center text-xl p-20 w-full">
+    <div className="flex flex-col justify-between items-center lg:hidden block absolute top-12 w-3/4 md:w-1/4 left-0 right-0 bg-gradient-to-t from-white to-indigo-200 transition border border-slate-600">
+      <ul className="text-center text-xl p-5 w-full">
 
-        <Link to="About">
+        <Link to="">
           <li className="my-4 py-4 border-b border-slate-800 hover:bg-white	 hover:rounded-xl">About</li>
         </Link>
-        <Link to="">
-          <li className="my-4 py-4 border-b border-slate-800 hover:bg-white	 hover:rounded-xl">Register a business</li>
-        </Link >
+
         <Link to="">
           <li className="my-4 py-4 border-b border-slate-800 hover:bg-white	 hover:rounded-xl">FAQ</li>
         </Link ><Link to="">
@@ -39,35 +37,42 @@ const Navbar = () => {
         </Link ><Link to="">
           <li className="my-4 py-4 border-b border-slate-800 hover:bg-white	 hover:rounded-xl">Customer support</li>
         </Link >
-        {user && <>
-          {
-            user.isBusiness &&
-            <Link to="">
-              <li className="my-4 py-4 border-b border-slate-800 hover:bg-white	 hover:rounded-xl">Add a service</li>
-            </Link >
-          }
-        </>}
 
-        {user && <>
-          {
-            user.isBusiness &&
-            <Link to="">
-              <li className="my-4 py-4 border-b border-slate-800 hover:bg-white	 hover:rounded-xl">Add an item</li>
-            </Link >
-          }
-        </>}
+        {user &&
+          <>
+            {
+              !user.isBusiness &&
+              <Link to="">
+                <li className="my-4 py-4 border-b border-slate-800 hover:bg-white	 hover:rounded-xl">Register a business</li>
+              </Link >
+            }
+
+            {
+              user.isBusiness &&
+              <Link to="/add-service">
+                <li className="my-4 py-4 border-b border-slate-800 hover:bg-white	 hover:rounded-xl">Add a service</li>
+              </Link >
+            }
+
+            {
+              user.isBusiness &&
+              <Link to="/add-item">
+                <li className="my-4 py-4 border-b border-slate-800 hover:bg-white	 hover:rounded-xl">Add an item</li>
+              </Link >
+            }
+          </>}
 
       </ul>
 
       <div className="flex justify-center mb-10">
-        <img className="w-5/12" src={DownLoadIcons} alt="download-icons" />
+        <img className="w-1/2" src={DownLoadIcons} alt="download-icons" />
       </div>
     </div>
   </>
 
   return (
     <nav>
-      <div className="h-10vh flex justify-between text-black px-10 py-2 border-b border-slate-800">
+      <div className="h-10vh bg-indigo-200 flex justify-between text-black px-10 py-2 border-b border-slate-800">
 
         <div>
           {click && content}
@@ -87,18 +92,18 @@ const Navbar = () => {
         <div>
           {
             !isLoggedIn && <Link to='/login'>
-              <span className="hover:text-indigo-500 transition hover:border-indigo-500 cursor-pointer">Login</span>
+              <span className="hover:text-white transition cursor-pointer">Login</span>
             </Link>
           }
           {user && <>
             {
               !user.isBusiness && <Link to='/user-profile'>
-                <span className="hover:text-fuchsia-600 transition hover:border-fuchsia-600 cursor-pointer">Profile</span>
+                <span className="hover:text-white transition cursor-pointer">Profile</span>
               </Link>
             }
             {
               user.isBusiness && <Link to='/business-profile'>
-                <span className="hover:text-fuchsia-600 transition hover:border-fuchsia-600 cursor-pointer">Profile</span>
+                <span className="hover:text-white transition cursor-pointer">Profile</span>
               </Link>
             }
           </>}
