@@ -15,6 +15,7 @@ import AddService from './pages/AddService'
 import AddItem from './pages/AddItem'
 import ServiceDetails from './pages/ServiceDetails'
 import { get } from './services/authService'
+import CategoryPage from './pages/CategoryPage'
 
 function App() {
 
@@ -22,13 +23,13 @@ function App() {
 
   const getAllServices = () => {
     get('/services')
-    .then((response) => {
-      console.log("Services ==>", response.data)
-      setAllServices(response.data)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+      .then((response) => {
+        console.log("Services ==>", response.data)
+        setAllServices(response.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   useEffect(() => {
@@ -55,12 +56,12 @@ function App() {
   //   return localStorage.getItem('isBusiness')
   // }
   const IsUser = () => {
-    return user.isBusiness ? <Navigate to='/' /> : <Outlet />
+    return user && user.isBusiness ? <Navigate to='/' /> : <Outlet />
   }
 
-  // const IsBusiness = () => {
-  //   return !user.isBusiness ? <Outlet /> : <Navigate to='/' />
-  // }
+  const IsBusiness = () => {
+    return user && !user.isBusiness ? <Navigate to='/' /> : <Outlet />
+  }
   // const getToken = () => {
   //   return localStorage.getItem('authToken')
   // }
@@ -75,60 +76,62 @@ function App() {
   return (
     <>
       {
-        loading ?
-          <div className="bg-indigo-50 h-screen flex flex-col justify-center items-center">
-            <RotatingLines
-              height={100}
-              width={100}
-              radius={5}
-              color="#f59e0b"
-              visible={true}
-            />
-          </div>
-          :
-          <div>
-            <Navbar />
+        // loading ?
+        //   <div className="bg-indigo-50 h-screen flex flex-col justify-center items-center">
+        //     <RotatingLines
+        //       height={100}
+        //       width={100}
+        //       radius={5}
+        //       color="#f59e0b"
+        //       visible={true}
+        //     />
+        //   </div>
+        //   :
+        <div>
+          <Navbar />
 
-            <Routes>
-              <Route path='/' element={<HomePage allServices={allServices} />} />
+          <Routes>
+            <Route path='/' element={<HomePage allServices={allServices} />} />
 
-              <Route element={<NotLoggedIn />}>
+            <Route element={<NotLoggedIn />}>
 
-                <Route path='/login' element={<LoginPage />} />
-                <Route path='/signup' element={<SignupPage />} />
+              <Route path='/login' element={<LoginPage />} />
+              <Route path='/signup' element={<SignupPage />} />
 
-              </Route>
+            </Route>
 
-              <Route element={<LoggedIn />}>
+            <Route element={<LoggedIn />}>
 
-                <Route path='/logout' />
+              <Route path='/logout' />
 
-              </Route>
+            </Route>
 
-              <Route element={<IsUser />}>
+            <Route element={<IsUser />}>
 
-                <Route path='/user-profile' element={<ProfilePage />} />
+              <Route path='/user-profile' element={<ProfilePage />} />
 
-              </Route>
+            </Route>
 
-              {/* <Route element={<IsBusiness />}>  */}
+            <Route element={<IsBusiness />}>
 
-              <Route path='/business-profile' element={<BusinessProfile />} />
+              <Route path='/business-profile' element={<BusinessProfile allServices={allServices} />} />
 
-              {/* </Route> */}
+            </Route>
 
-              <Route path='/all-categories' element={<AllCategories allServices={allServices} />} />
+            <Route path='/all-categories' element={<AllCategories allServices={allServices} />} />
 
-              <Route path='/add-service' element={<AddService allServices={getAllServices} updateServices={updateServices} />} />
+            <Route path='/add-service' element={<AddService allServices={getAllServices} updateServices={updateServices} />} />
 
-              <Route path='/add-item' element={<AddItem />} />
+            <Route path='/add-item' element={<AddItem />} />
 
-              <Route path='/services/:serviceId' element={<ServiceDetails allServices={allServices} />} />
+            <Route path='/services/category/:thisCategory' element={<CategoryPage allServices={allServices} />} />
 
-            </Routes>
+            <Route path='/services/:serviceId' element={<ServiceDetails allServices={allServices} />} />
 
-            <Footer />
-          </div>
+          </Routes>
+
+          <Footer />
+        </div>
       }
     </>
   )

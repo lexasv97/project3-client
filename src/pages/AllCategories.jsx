@@ -1,24 +1,19 @@
 import { useState, useEffect } from "react"
 import { get } from "../services/authService"
 import { Link } from "react-router-dom";
-import SearchName from "../components/SearchName";
+import SearchCategory from "../components/SearchCategory";
+
 
 const AllCategories = ({ allServices }) => {
 
-    // prevent dublicates
-    function noDublicates(arr) {
-        const newArr = []
-        for (let i = 0; i < arr.length; i++) {
-            if (newArr.indexOf(arr[i]) === -1) {
-                newArr.push(arr[i])
-            }
-        }
-        return newArr
-    }
-
     return (
-        <div>
-            <SearchName allServices={allServices} />
+        <div className="bg-gradient-to-t from-white to-indigo-50">
+            <div>
+                <h1 className="text-3xl font-bold py-2 flex justify-center">All categories</h1>
+            </div>
+            <div>
+                <SearchCategory allServices={allServices} />
+            </div>
         </div>
     )
 }

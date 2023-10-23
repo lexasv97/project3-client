@@ -1,11 +1,28 @@
 import Review from "../components/Review"
 import { Link } from "react-router-dom"
 import MainPicture from '../assets/main-picture.png'
-import { useState, useEffect } from "react"
+import SearchName from "../components/SearchName"
 import { get } from "../services/authService"
-import SearchCategory from "../components/SearchCategory"
+import { useState, useEffect } from "react"
 
 const HomePage = ({ allServices }) => {
+
+  const [allReviews, setAllReviews] = useState([])
+
+  const getAllReviews = () => {
+    get('/reviews')
+      .then((response) => {
+        console.log("Reviews ==>", response.data)
+        setAllReviews(response.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  useEffect(() => {
+    getAllReviews()
+  }, [])
 
   // prevent dublicates
   function noDublicates(arr) {
@@ -33,38 +50,19 @@ const HomePage = ({ allServices }) => {
           <img src={MainPicture} alt="main-picture" />
         </div>
 
-        <SearchCategory allServices={allServices} />
-
       </div>
 
       <div className="bg-gradient-to-t from-white to-indigo-50">
 
         <div className="flex flex-col items-center justify-center">
 
-          <ul className="w-full text-xl">
+          <ul className="w-full text-xl border-b border-slate-800">
 
+            <SearchName allServices={allServices} />
 
-            <Link to="">
-              <li className="flex justify-center py-4 border-b border-t border-slate-800 hover:bg-indigo-200">Construction</li>
-            </Link>
-
-
-
-            <Link to="">
-              <li className="flex justify-center py-4 border-b border-slate-800 hover:bg-indigo-200">Delivery</li>
-            </Link>
-            <Link to="">
-              <li className="flex justify-center py-4 border-b border-slate-800 hover:bg-indigo-200">Cleaning</li>
-            </Link>
-            <Link to="">
-              <li className="flex justify-center py-4 border-b border-slate-800 hover:bg-indigo-200">Photo/video</li>
-            </Link>
-            <Link to="">
-              <li className="flex justify-center py-4 border-b border-slate-800 hover:bg-indigo-200">IT services</li>
-            </Link>
           </ul>
 
-          <div className="bg-amber-500 flex justify-center w-1/2 text-white text-xl py-2 my-2 border border-slate-600 rounded-3xl">
+          <div className="bg-amber-500 flex justify-center w-1/4 text-white text-xl py-2 my-2 border border-slate-600 rounded-3xl">
             <Link to='/all-categories'>
               <span className="hover:text-black transition cursor-pointer">All categories</span>
             </Link>
@@ -81,9 +79,19 @@ const HomePage = ({ allServices }) => {
         </div>
       </div>
       <div>
-        <Review />
-        <Review />
-        <Review />
+
+        { allReviews && 
+        <div> 
+          {
+          allReviews.map((review) => {
+            <div key={review._id}>
+              <Review review={review} allReviews={allReviews} />
+            </div>
+          })
+          }
+        </div>
+        }
+
       </div>
     </div>
   )

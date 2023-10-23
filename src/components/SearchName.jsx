@@ -6,7 +6,11 @@ const SearchName = ({ allServices }) => {
 
     const [searchField, setSearchField] = useState('')
 
-    const filteredServices = allServices.filter(
+    const handleChange = (e) => {
+        setSearchField(e.target.value);
+    }
+
+    const filteredServices = allServices.length ? allServices.filter(
         service => {
             return (
                 service
@@ -19,25 +23,21 @@ const SearchName = ({ allServices }) => {
                     .includes(searchField.toLowerCase())
             )
         }
-    )
-
-    const handleChange = (e) => {
-        setSearchField(e.target.value);
-    }
+    ) : []
 
     const searchList = () => {
         return (
-            <div style={{overflowY: 'scroll', height:'70vh'}}>
+        
                 <SearchList filteredServices={filteredServices} />
-            </div>
+      
         )
     }
 
     return (
         <section>
             <div className="flex items-center justify-center my-2 justify-evenly">
-                <input className="w-1/2 border border-slate-600 py-2 rounded-3xl"
-                    placeholder="  Search"
+                <input className="w-1/2 border border-slate-600 py-2 rounded-3xl px-2"
+                    placeholder="Search for..."
                     type="text"
                     onChange={handleChange}
                 />

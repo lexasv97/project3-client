@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { post } from "../services/authService";
 
-const AddService = ({getAllServices, updateServices}) => {
+const AddService = ({ getAllServices, updateServices }) => {
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -60,12 +60,28 @@ const AddService = ({getAllServices, updateServices}) => {
                     onChange={(e) => setImage(e.target.value)}
                 />
                 <label htmlFor="category">Category</label>
-                <input
-                    type="text"
+                <select
                     name="category"
                     value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                />
+                    onChange={(e) => setCategory(e.target.value)}>
+                    <option value={"Construction"}>Construction</option>
+                    <option value={"Delivery"}>Delivery</option>
+                    <option value={"Cleaning"}>Cleaning</option>
+                    <option value={"IT-services"}>IT services</option>
+                    <option value={"Photo-video"}>Photo/video</option>
+                    <option value={"Moving"}>Moving</option>
+                    <option value={"Events"}>Events</option>
+                    <option value={"Design"}>Design</option>
+                    <option value={"Beauty"}>Beauty</option>
+                    <option value={"Law-services"}>Law services</option>
+                    <option value={"Appliance-Repair"}>Appliance Repair</option>
+                    <option value={"Design"}>Design</option>
+                    <option value={"Catering"}>Catering</option>
+                    <option value={"Auto-services"}>Auto services</option>
+                    <option value={"Personal-assistance"}>Personal assistance</option>
+                    <option value={"Child-care"}>Child care</option>
+                    <option value={"Junk-removal"}>Junk removal</option>
+                </select>
                 <label htmlFor="location">Location</label>
                 <input
                     type="text"

@@ -22,7 +22,7 @@ const SearchCategory = ({ allServices }) => {
 
     const searchList = () => {
         return (
-            <div style={{overflowY: 'scroll'}}>
+            <div style={{ height: '70vh' }}>
                 <SearchList filteredServices={filteredServices} />
             </div>
         )
@@ -31,14 +31,11 @@ const SearchCategory = ({ allServices }) => {
     return (
         <section>
             <div className="flex items-center justify-center my-2 justify-evenly">
-                <input className="w-1/2 border border-slate-600 py-2 rounded-3xl"
-                    placeholder="  Search"
+                <input className="w-1/2 border border-slate-600 py-2 rounded-3xl px-2"
+                    placeholder="Search for..."
                     type="text"
                     onChange={handleChange}
                 />
-                <div className="bg-amber-500 text-white flex justify-center w-1/4 py-2 border border-slate-600 rounded-3xl">
-                    <button type="submit"><span className="hover:text-black transition cursor-pointer">Search</span></button>
-                </div>
             </div>
             {searchList()}
         </section>

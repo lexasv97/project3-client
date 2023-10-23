@@ -12,9 +12,9 @@ const Navbar = () => {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
 
-  // const getToken = () => {
-  //   return localStorage.getItem('authToken')
-  // }
+  const getToken = () => {
+    return localStorage.getItem('authToken')
+  }
 
   // const getBusinessStatus = () => {
   //   return localStorage.getItem('isBusiness')
@@ -23,7 +23,7 @@ const Navbar = () => {
   // const businessStatus = getBusinessStatus();
 
   const content = <>
-    <div className="flex flex-col justify-between items-center lg:hidden block absolute top-12 w-3/4 md:w-1/4 left-0 right-0 bg-gradient-to-t from-white to-indigo-200 transition border border-slate-600">
+    <div className="flex flex-col justify-between items-center  absolute top-12 w-3/4 md:w-1/4 left-0 right-0 bg-gradient-to-t from-white to-indigo-200 transition border border-slate-600">
       <ul className="text-center text-xl p-5 w-full">
 
         <Link to="">
@@ -35,7 +35,7 @@ const Navbar = () => {
         </Link ><Link to="">
           <li className="my-4 py-4 border-b border-slate-800 hover:bg-white	 hover:rounded-xl">Our blog</li>
         </Link ><Link to="">
-          <li className="my-4 py-4 border-b border-slate-800 hover:bg-white	 hover:rounded-xl">Customer support</li>
+          <li className="my-4 py-4 border-b border-slate-800 hover:bg-white	 hover:rounded-xl">Support</li>
         </Link >
 
         {user &&
@@ -57,7 +57,7 @@ const Navbar = () => {
             {
               user.isBusiness &&
               <Link to="/add-item">
-                <li className="my-4 py-4 border-b border-slate-800 hover:bg-white	 hover:rounded-xl">Add an item</li>
+                <li className="my-4 py-4 border-b border-slate-800 hover:bg-white	 hover:rounded-xl">Sell an item</li>
               </Link >
             }
           </>}
@@ -72,7 +72,7 @@ const Navbar = () => {
 
   return (
     <nav>
-      <div className="h-10vh bg-indigo-200 flex justify-between text-black px-10 py-2 border-b border-slate-800">
+      <div className="h-10vh bg-indigo-200 flex justify-between px-10 py-2 border-b border-slate-800">
 
         <div>
           {click && content}
@@ -91,7 +91,7 @@ const Navbar = () => {
 
         <div>
           {
-            !isLoggedIn && <Link to='/login'>
+            !getToken() && <Link to='/login'>
               <span className="hover:text-white transition cursor-pointer">Login</span>
             </Link>
           }

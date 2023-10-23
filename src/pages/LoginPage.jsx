@@ -45,11 +45,11 @@ const UserLogin = () => {
       <div className="flex flex-col items-center justify-center w-1/2 bg-indigo-200 border border-slate-600 rounded-3xl">
         <span className="text-3xl font-bold my-3">Login</span>
 
-        <form onSubmit={handleLoginSubmit} className="flex flex-col items-center justify-center">
+        <form onSubmit={handleLoginSubmit} className="flex flex-col items-center justify-center w-3/5">
 
           <div className="flex items-center justify-center my-2 justify-evenly w-full">
-            <input className="w-11/12 border border-slate-600 py-2 rounded-3xl"
-              placeholder="  email"
+            <input className="w-11/12 border border-slate-600 py-2 rounded-3xl px-2"
+              placeholder="email"
               type="email"
               name="email"
               value={email}
@@ -61,8 +61,8 @@ const UserLogin = () => {
           </div>
 
           <div className="flex items-center justify-center my-2 justify-evenly w-full">
-            <input className="w-11/12 border border-slate-600 py-2 rounded-3xl"
-              placeholder="  password"
+            <input className="w-11/12 border border-slate-600 py-2 rounded-3xl px-2"
+              placeholder="password"
               type="password"
               name="password"
               value={password}

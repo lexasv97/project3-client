@@ -1,4 +1,4 @@
-
+import PopUpMessage from "../components/PopUpMessage"
 import { AuthContext } from "../context/auth.context"
 import { useContext } from "react"
 
@@ -7,16 +7,16 @@ const UserProfile = () => {
     const { user, logOut } = useContext(AuthContext)
 
     return (
-        <div>
+        <div className="flex flex-col justify-center items-center">
             <h1>User profile</h1>
 
             {
                 user &&
                 <div>
                     <h2>Welcome, {user.name}!</h2>
-                    <img src={user.profileImage} alt="profileImage" />
+                    <img className="rounded-full" src={user.profileImage} alt="profileImage" />
 
-                    <button onClick={logOut}>logout</button>
+                    <PopUpMessage task={logOut} title='Logout' />
                 </div>
 
                 
