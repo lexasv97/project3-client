@@ -16,6 +16,8 @@ import AddItem from './pages/AddItem'
 import ServiceDetails from './pages/ServiceDetails'
 import { get } from './services/authService'
 import CategoryPage from './pages/CategoryPage'
+import UpdateService from './pages/UpdateService'
+import UpdateProfile from './pages/UpdateProfile'
 
 function App() {
 
@@ -127,6 +129,10 @@ function App() {
             <Route path='/services/category/:thisCategory' element={<CategoryPage allServices={allServices} />} />
 
             <Route path='/services/:serviceId' element={<ServiceDetails allServices={allServices} />} />
+
+            <Route path='/services/update/:serviceId' element={<UpdateService />} />
+
+            <Route path='/users/update-profile' element={<UpdateProfile />} />
 
           </Routes>
 

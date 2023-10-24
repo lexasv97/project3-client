@@ -1,8 +1,8 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom";
-import { post } from "../services/authService";
+import { get, put } from "../services/authService"
+import { useState, useEffect } from "react"
+import { useNavigate, useParams } from "react-router-dom";
 
-const AddService = ({ getAllServices, updateServices }) => {
+const UpdateService = () => {
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -12,15 +12,29 @@ const AddService = ({ getAllServices, updateServices }) => {
 
     const navigate = useNavigate()
 
+    const { serviceId } = useParams()
+
+    useEffect(() => {
+        get(`/services/${serviceId}`)
+            .then((response) => {
+                const thisService = response.data
+                setName(thisService.name)
+                setDescription(thisService.description)
+                setImage(thisService.image)
+                setCategory(thisService.category)
+                setLocation(thisService.location)
+            })
+            .catch((error) => console.log(error));
+    }, [serviceId])
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
         const body = { name, description, image, category, location }
 
-        post('/services/new', body)
+        put(`/services/${serviceId}`, body)
             .then((response) => {
                 console.log("New Service =====>", response.data)
-                updateServices(response.data)
                 setName("")
                 setDescription("")
                 setImage("")
@@ -35,7 +49,7 @@ const AddService = ({ getAllServices, updateServices }) => {
 
     return (
         <div>
-            <h1 className="text-3xl font-bold py-2 flex justify-center">Add new service</h1>
+            <h1 className="text-3xl font-bold py-2 flex justify-center">Update service</h1>
 
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name">Name</label>
@@ -44,7 +58,6 @@ const AddService = ({ getAllServices, updateServices }) => {
                     name="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    required
                 />
                 <label htmlFor="description">Description</label>
                 <input
@@ -52,7 +65,6 @@ const AddService = ({ getAllServices, updateServices }) => {
                     name="description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    required
                 />
                 <label htmlFor="image">Image</label>
                 <input
@@ -65,9 +77,7 @@ const AddService = ({ getAllServices, updateServices }) => {
                 <select
                     name="category"
                     value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                    required>
-                    <option hidden default value="" disabled="disabled">Select a category</option>
+                    onChange={(e) => setCategory(e.target.value)}>
                     <option value={"Construction"}>Construction</option>
                     <option value={"Delivery"}>Delivery</option>
                     <option value={"Cleaning"}>Cleaning</option>
@@ -92,13 +102,11 @@ const AddService = ({ getAllServices, updateServices }) => {
                     name="location"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    required
                 />
-                <button type='submit'>Create a service</button>
+                <button type='submit'>Update service</button>
             </form>
-
         </div>
     )
 }
 
-export default AddService
+export default UpdateService

@@ -1,4 +1,4 @@
-import CategoryCard from "./CategoryCards"
+import CategoryCard from "./CategoryCard"
 
 const SearchList = ({ filteredServices }) => {
 

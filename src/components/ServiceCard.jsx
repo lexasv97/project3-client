@@ -23,26 +23,47 @@ const ServiceCard = ({ service }) => {
     getAllReviews()
   }, [])
 
+  const averageRating = (reviews) => {
+
+    let sum = 0
+    reviews.map((review) => {
+      sum += review.rating
+    })
+    return (
+      <div>
+        {sum / reviews.length}
+      </div>
+    )
+  }
+
   return (
-    <div className="flex justify-center grid grid-cols-3 gap 2 px-2 bg-indigo-50">
+    <div className="flex flex-col items-center border-t border-slate-800">
+      <div data-aos="fade-right" className="flex justify-center px-2 bg-indigo-50 rounded-3xl mx-4 mt-4 px-4 border border-slate-600 w-10/12 flex items-center py-2 space-x-4 grid grid-cols-3 gap-2">
 
-      <div>
-      <img src={service.image} alt="service-image" />
+        <div className="flex justify-center items-center">
+          <img src={service.image} alt="service-image" />
+        </div>
+
+        <div className="flex flex-col justify-start">
+
+          <h3 className="text-xl font-normal">{service.name}</h3>
+          <p>{service.location}</p>
+          <Link to={`/services/${service._id}`}>
+            <span className="font-bold border-b-2 border-black hover:text-white hover:border-white transition cursor-pointer">Details</span>
+          </Link>
+        </div>
+
+        {
+          service.reviews.length ?
+            <div className="flex justify-center items-center">
+              <span>Average rating:</span>
+              {
+                averageRating(service.reviews)
+              }
+            </div>
+            : <p>No rating yet</p>
+        }
       </div>
-
-      <div className="flex flex-col justify-start">
-        
-        <h3 className="text-xl font-normal">{service.name}</h3>
-        <p>{service.location}</p>
-        <Link to={`/services/${service._id}`}>
-          <span className="font-bold border-b-2 border-black hover:text-white hover:border-white transition cursor-pointer">Details</span>
-        </Link>
-      </div>
-
-      <div>
-        {service.reviews}
-      </div>
-
     </div>
   )
 }

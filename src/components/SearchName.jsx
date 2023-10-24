@@ -14,10 +14,6 @@ const SearchName = ({ allServices }) => {
         service => {
             return (
                 service
-                    .name
-                    .toLowerCase()
-                    .includes(searchField.toLowerCase()) ||
-                service
                     .category
                     .toLowerCase()
                     .includes(searchField.toLowerCase())

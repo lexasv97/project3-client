@@ -3,6 +3,7 @@ import { useContext } from "react"
 import PopUpMessage from "../components/PopUpMessage"
 import { useState, useEffect } from "react"
 import ServiceCard from "../components/ServiceCard"
+import { Link } from "react-router-dom"
 
 const BusinessProfile = ({ allServices }) => {
 
@@ -27,7 +28,16 @@ const BusinessProfile = ({ allServices }) => {
             {
                 user &&
                 <div>
-                    <h3 className="text-xl font-normal">Welcome to your business page, {user.name}!</h3>
+                    <h3 className="text-xl font-normal flex justify-center">Welcome to your business page, {user.name}!</h3>
+
+                    <div className="flex flex-row justify-evenly">
+                        <div className="bg-amber-500 flex justify-center w-1/4 text-white py-2 my-2 border border-slate-600 rounded-3xl">
+                            <Link to='/add-service' className="hover:text-black transition cursor-pointer">Add a service</Link>
+                        </div>
+                        <div className="bg-amber-500 flex justify-center w-1/4 text-white py-2 my-2 border border-slate-600 rounded-3xl">
+                            <Link to='/users/update-profile' className="hover:text-black transition cursor-pointer">Update profile</Link>
+                        </div>
+                    </div>
                     <div className="">
                         <img className="rounded-3xl" src={user.profileImage} alt="profileImage" />
                     </div>
@@ -48,7 +58,7 @@ const BusinessProfile = ({ allServices }) => {
                                 })
                             }
                         </div>
-                        : <p>No services</p>
+                        : <p>No added services yet</p>
                     }
 
                     <div className="flex justify-center">

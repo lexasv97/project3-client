@@ -23,22 +23,25 @@ const CategoryPage = ({ allServices }) => {
     // }
 
     return (
-        <div>
+        <div className="pb-4">
             {
                 services.length ?
 
-                <div>
-                    <h1 className="text-3xl font-bold py-2 flex justify-center">{thisCategory[0].toUpperCase() + thisCategory.slice(1)}</h1>
-                    <h3 className="text-xl font-normal">Results</h3>
-                    {
-                        services.map((service) => {
-                            return (
-                                <ServiceCard key={service._id} service={service} />
-                            )
-                        })
-                    }
-                </div>
-                : <p>No services</p>
+                    <div>
+                        <h1 className="text-3xl font-bold py-2 flex justify-center bg-indigo-50 border-b border-slate-800">{thisCategory[0].toUpperCase() + thisCategory.slice(1)}</h1>
+                        <div className="flex items-center justify-center py-2">
+                            <h3 className="text-xl">Results</h3>
+
+                        </div>
+                        {
+                            services.map((service) => {
+                                return (
+                                    <ServiceCard key={service._id} service={service} />
+                                )
+                            })
+                        }
+                    </div>
+                    : <p>No services</p>
             }
         </div>
     )

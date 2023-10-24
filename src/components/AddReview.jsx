@@ -1,17 +1,20 @@
-import { useState } from "react"
 import { post } from "../services/authService";
+import { AuthContext } from "../context/auth.context";
+import { useContext, useState } from "react";
 
 const AddReview = ({ refreshService, serviceId }) => {
 
     const [comment, setComment] = useState("");
     const [rating, setRating] = useState(0);
 
+    const { user } = useContext(AuthContext);
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const requestBody = { comment, rating, serviceId };
+        const requestBody = { comment, rating, serviceId, user };
 
-        post(`/reviews/new/${serviceId}`, requestBody)
+        post('/reviews/new', requestBody)
             .then((response) => {
                 setComment("")
                 setRating(0)
@@ -24,7 +27,7 @@ const AddReview = ({ refreshService, serviceId }) => {
         <div>
             <h1 className="text-xl py-2 flex justify-center">Leave a review</h1>
 
-            <form className="flex grid grid-cols-2 gap-2 px-2 py-2" onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="flex grid grid-cols-2 gap-2 px-2 py-2">
 
                 <div className="flex flex-col items-center">
                     <label htmlFor="comment">Comment:</label>
@@ -35,6 +38,7 @@ const AddReview = ({ refreshService, serviceId }) => {
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                         cols="25" rows="3"
+                        required
                     />
                 </div>
                 <div className="flex grid gap-2">
@@ -44,7 +48,10 @@ const AddReview = ({ refreshService, serviceId }) => {
                             className="border border-slate-600 rounded"
                             name="rating"
                             value={rating}
-                            onChange={(e) => setRating(e.target.value)}>
+                            onChange={(e) => setRating(e.target.value)}
+                            required
+                        >
+                            <option hidden default value="" disabled="disabled">Select</option>
                             <option value="5">5</option>
                             <option value="4">4</option>
                             <option value="3">3</option>

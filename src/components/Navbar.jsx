@@ -41,13 +41,6 @@ const Navbar = () => {
         {user &&
           <>
             {
-              !user.isBusiness &&
-              <Link to="">
-                <li className="my-4 py-4 border-b border-slate-800 hover:bg-white	 hover:rounded-xl">Register a business</li>
-              </Link >
-            }
-
-            {
               user.isBusiness &&
               <Link to="/add-service">
                 <li className="my-4 py-4 border-b border-slate-800 hover:bg-white	 hover:rounded-xl">Add a service</li>

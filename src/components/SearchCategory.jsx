@@ -22,7 +22,7 @@ const SearchCategory = ({ allServices }) => {
 
     const searchList = () => {
         return (
-            <div style={{ height: '70vh' }}>
+            <div>
                 <SearchList filteredServices={filteredServices} />
             </div>
         )
