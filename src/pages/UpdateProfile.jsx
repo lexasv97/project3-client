@@ -34,13 +34,16 @@ const UpdateProfile = () => {
     const handleToggle = (e) => {
         setIsBusiness(!isBusiness)
     }
-
-    useEffect(() => {
-        setEmail(user.email)
-        setName(user.name)
-        setPhone(user.phone)
-        setIsBusiness(user.isBusiness)
-    }, [user])
+    // user && (
+        useEffect(() => {
+            if(user){
+                setEmail(user.email)
+                setName(user.name)
+                setPhone(user.phone)
+                setIsBusiness(user.isBusiness)
+            }
+        }, [user])
+        // )
 
     const handleUpdateSubmit = (e) => {
         e.preventDefault();
@@ -61,7 +64,8 @@ const UpdateProfile = () => {
             })
     }
 
-    return (
+    return ( 
+        user &&
         <div style={{ height: '70vh' }} className="flex flex-col justify-center items-center">
             <div className="flex flex-col items-center justify-center w-1/2 bg-indigo-200 border border-slate-600 rounded-3xl">
                 <span className="text-3xl font-bold my-3">Update profile</span>

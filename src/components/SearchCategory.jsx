@@ -23,15 +23,15 @@ const SearchCategory = ({ allServices }) => {
     const searchList = () => {
         return (
             <div>
-                <SearchList filteredServices={filteredServices} />
+                <SearchList className="font-xl" filteredServices={filteredServices} />
             </div>
         )
     }
 
     return (
         <section>
-            <div className="flex items-center justify-center my-2 justify-evenly">
-                <input className="w-1/2 border border-slate-600 py-2 rounded-3xl px-2"
+            <div className="flex items-center justify-center by-2 border-b border-slate-800">
+                <input className="w-1/2 border border-slate-600 py-2 rounded-3xl px-2 mb-2"
                     placeholder="Search for..."
                     type="text"
                     onChange={handleChange}

@@ -12,7 +12,6 @@ import { AuthContext } from './context/auth.context'
 import AllCategories from './pages/AllCategories'
 import { RotatingLines } from 'react-loader-spinner'
 import AddService from './pages/AddService'
-import AddItem from './pages/AddItem'
 import ServiceDetails from './pages/ServiceDetails'
 import { get } from './services/authService'
 import CategoryPage from './pages/CategoryPage'
@@ -22,6 +21,23 @@ import UpdateProfile from './pages/UpdateProfile'
 function App() {
 
   const [allServices, setAllServices] = useState([])
+
+  const [allReviews, setAllReviews] = useState([])
+
+  const getAllReviews = () => {
+    get('/reviews')
+      .then((response) => {
+        console.log("Reviews ==>", response.data)
+        setAllReviews(response.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  useEffect(() => {
+    getAllReviews()
+  }, [])
 
   const getAllServices = () => {
     get('/services')
@@ -93,7 +109,7 @@ function App() {
           <Navbar />
 
           <Routes>
-            <Route path='/' element={<HomePage allServices={allServices} />} />
+            <Route path='/' element={<HomePage allServices={allServices} allReviews={allReviews} />} />
 
             <Route element={<NotLoggedIn />}>
 
@@ -110,7 +126,7 @@ function App() {
 
             <Route element={<IsUser />}>
 
-              <Route path='/user-profile' element={<ProfilePage />} />
+              <Route path='/user-profile' element={<ProfilePage allReviews={allReviews} />} />
 
             </Route>
 
@@ -123,8 +139,6 @@ function App() {
             <Route path='/all-categories' element={<AllCategories allServices={allServices} />} />
 
             <Route path='/add-service' element={<AddService allServices={getAllServices} updateServices={updateServices} />} />
-
-            <Route path='/add-item' element={<AddItem />} />
 
             <Route path='/services/category/:thisCategory' element={<CategoryPage allServices={allServices} />} />
 

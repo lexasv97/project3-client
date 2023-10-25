@@ -9,18 +9,14 @@ const CategoryPage = ({ allServices }) => {
     const { thisCategory } = useParams()
 
     useEffect(() => {
-        if (allServices) {
+        if (allServices && thisCategory) {
             console.log("All services =====>", allServices)
             let searchedServices = allServices.filter((service) => service.category.toLowerCase() === thisCategory.toLowerCase())
             console.log("Searched services ====>", searchedServices)
             setServices(searchedServices)
+            console.log("Services ====>", services)
         }
     }, [thisCategory, allServices])
-
-    // const deleteService = (id) => {
-    //     let deleted = allServices.filter((service) => service._id !== id)
-    //     setServices(deleted)
-    // }
 
     return (
         <div className="pb-4">
@@ -31,7 +27,6 @@ const CategoryPage = ({ allServices }) => {
                         <h1 className="text-3xl font-bold py-2 flex justify-center bg-indigo-50 border-b border-slate-800">{thisCategory[0].toUpperCase() + thisCategory.slice(1)}</h1>
                         <div className="flex items-center justify-center py-2">
                             <h3 className="text-xl">Results</h3>
-
                         </div>
                         {
                             services.map((service) => {
@@ -41,7 +36,8 @@ const CategoryPage = ({ allServices }) => {
                             })
                         }
                     </div>
-                    : <p>No services</p>
+                    
+                    : <p>No services yet</p>
             }
         </div>
     )

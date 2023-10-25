@@ -61,7 +61,7 @@ const BusinessProfile = ({ allServices }) => {
                     </div>
 
                     {services.length ?
-                        <div>
+                        <div className="border-t border-slate-800">
 
                             <div>
                                 <h1 className="text-3xl font-bold py-2 flex justify-center"> Your services</h1>

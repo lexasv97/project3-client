@@ -1,46 +1,69 @@
 import { Link } from "react-router-dom"
 import MainPicture from '../assets/main-picture.png'
-import SearchName from "../components/SearchName"
-import { get } from "../services/authService"
 import { useState, useEffect } from "react"
 import ReviewCard from "../components/ReviewCard"
 import HotOffer from '../assets/hot-offer.png'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { ReactSearchAutocomplete } from 'react-search-autocomplete' //
+import SearchList from "../components/SearchList"
 
-const HomePage = ({ allServices }) => {
+const HomePage = ({ allServices, allReviews }) => {
 
-  const [allReviews, setAllReviews] = useState([])
+  const [search, setSearch] = useState({})
 
-  const getAllReviews = () => {
-    get('/reviews')
-      .then((response) => {
-        console.log("Reviews ==>", response.data)
-        setAllReviews(response.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+  //
+
+  const handleOnSearch = (string, results) => {
+    // onSearch will have as the first callback parameter
+    // the string searched and for the second the results.
+    // console.log("string", string, "results", results)
   }
 
+  const handleOnHover = (result) => {
+    // the item hovered
+    // console.log("item hovered", result)
+  }
+
+  const handleOnSelect = (item) => {
+    // the item selected
+    console.log("item selected", item)
+    setSearch(item)
+    
+  }
+
+  const handleOnFocus = () => {
+    // console.log('Focused')
+  }
+
+  const formatResult = (item) => {
+    return (
+      <>
+        <span style={{ display: 'block', textAlign: 'left' }}>name: {item.name}</span>
+        <span style={{ display: 'block', textAlign: 'left' }}>category: {item.category}</span>
+      </>
+    )
+  }
+
+  //
+
+  const [limitedReviews, setLimitedReviews] = useState([])
+
   useEffect(() => {
-    getAllReviews()
+    console.log("search selected", search)
+  }, [search])
+
+  useEffect(() => {
+    let newArr = []
+    for (let i = 0; i < 2; i++) {
+      newArr.push(allReviews[i])
+    }
+    setLimitedReviews(newArr)
   }, [])
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
-}, [])
-
-  // prevent dublicates
-  function noDublicates(arr) {
-    const newArr = []
-    for (let i = 0; i < arr.length; i++) {
-      if (newArr.indexOf(arr[i]) === -1) {
-        newArr.push(arr[i])
-      }
-    }
-    return newArr
-  }
+  }, [])
 
   return (
     <div className="pb-4">
@@ -53,7 +76,7 @@ const HomePage = ({ allServices }) => {
           <h3 className="text-xl">We will help you to find reliable doers around</h3>
 
         </div>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center pb-2">
           <img src={MainPicture} alt="main-picture" />
         </div>
 
@@ -61,18 +84,40 @@ const HomePage = ({ allServices }) => {
 
       <div className="bg-gradient-to-t from-white to-indigo-50">
 
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col ">
 
-          <ul className="w-full text-xl border-b border-slate-800">
+          <div className="w-full flex justify-center text-xl border-b border-slate-800">
 
-            <SearchName allServices={allServices} />
+            {/* <SearchName allServices={allServices} /> */}
+            <form className="w-3/4 pb-2">
+              <ReactSearchAutocomplete
+                placeholder="Search for..."
+                items={allServices}
+                onSearch={handleOnSearch}
+                onHover={handleOnHover}
+                onSelect={handleOnSelect}
+                onFocus={handleOnFocus}
+                autoFocus
+                formatResult={formatResult}
+              />
+              <div className="flex justify-center">
+              <div className="bg-amber-500 flex justify-center w-1/4 text-white text-xl py-2 my-2 border border-slate-600 rounded-3xl">
+                <Link to={`/services/${search._id}`} className="hover:text-black transition cursor-pointer">Search</Link>
+              </div>
+              </div>
+            </form>
+          </div>
 
-          </ul>
+          <div className="">
+            <SearchList filteredServices={allServices} />
+          </div>
+          <div className="flex justify-center">
+            <div className="bg-amber-500 flex justify-center w-1/4 text-white text-xl py-2 my-2 border border-slate-600 rounded-3xl">
+              <Link to='/all-categories'>
+                <span className="hover:text-black transition cursor-pointer">All categories</span>
+              </Link>
+            </div>
 
-          <div className="bg-amber-500 flex justify-center w-1/4 text-white text-xl py-2 my-2 border border-slate-600 rounded-3xl">
-            <Link to='/all-categories'>
-              <span className="hover:text-black transition cursor-pointer">All categories</span>
-            </Link>
           </div>
 
         </div>
@@ -84,6 +129,8 @@ const HomePage = ({ allServices }) => {
           <div className="px-4">
             <p>Fusce erat ante, consectetur quis dapibus id, aliquam a est. Sed ultricies magna sed nisi condimentum, id dapibus magna interdum. Donec varius consequat nisi, a feugiat orci ullamcorper in. Maecenas congue pellentesque tempor. Ut tellus elit, mattis quis odio at, pharetra consequat mauris. Phasellus ac risus sit amet ligula scelerisque dictum. Aenean nec enim a enim hendrerit blandit ut eu orci. Vivamus id malesuada eros. Aliquam erat volutpat.</p>
           </div>
+
+
           <div className="flex justify-center">
             <img src={HotOffer} alt="hot-offer" />
           </div>
@@ -91,11 +138,15 @@ const HomePage = ({ allServices }) => {
       </div>
       <div>
 
-        {allReviews &&
+        {allReviews.length &&  // limitedReviews.length && 
           <div>
             {
+
+              // limitedReviews.map((review) => {
+              //   return (<ReviewCard key={review._id} review={review} />)
+              // })
               allReviews.map((review) => {
-                return ( <ReviewCard key={review._id} review={review} />)
+                return (<ReviewCard key={review._id} review={review} />)
               })
             }
           </div>
