@@ -1,6 +1,3 @@
-import { useState, useEffect } from "react"
-import { get } from "../services/authService"
-import { Link } from "react-router-dom";
 import SearchCategory from "../components/SearchCategory";
 
 

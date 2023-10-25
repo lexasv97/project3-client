@@ -41,7 +41,7 @@ const ServiceCard = ({ service }) => {
       <div data-aos="fade-right" className="flex justify-center px-2 bg-indigo-50 rounded-3xl mx-4 mt-4 px-4 border border-slate-600 w-10/12 flex items-center py-2 space-x-4 grid grid-cols-3 gap-2">
 
         <div className="flex justify-center items-center">
-          <img src={service.image} alt="service-image" />
+          <img className="rounded-3xl w-3/5" src={service.image} alt="service-image" />
         </div>
 
         <div className="flex flex-col justify-start">
@@ -55,8 +55,8 @@ const ServiceCard = ({ service }) => {
 
         {
           service.reviews.length ?
-            <div className="flex justify-center items-center">
-              <span>Average rating:</span>
+            <div className="flex justify-center items-center pr-10">
+              <span className="flex flex-row gap-2">Average rating:</span>
               {
                 averageRating(service.reviews)
               }

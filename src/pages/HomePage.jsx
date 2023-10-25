@@ -5,6 +5,8 @@ import { get } from "../services/authService"
 import { useState, useEffect } from "react"
 import ReviewCard from "../components/ReviewCard"
 import HotOffer from '../assets/hot-offer.png'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const HomePage = ({ allServices }) => {
 
@@ -24,6 +26,10 @@ const HomePage = ({ allServices }) => {
   useEffect(() => {
     getAllReviews()
   }, [])
+
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+}, [])
 
   // prevent dublicates
   function noDublicates(arr) {

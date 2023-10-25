@@ -99,7 +99,6 @@ const UpdateProfile = () => {
                             placeholder="+12223334455"
                             type="phone"
                             name="phone"
-                            value={phone}
                             onChange={hanglePhone}
                         />
                         <div>

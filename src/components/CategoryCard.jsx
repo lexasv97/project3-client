@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const CategoryCard = ({ service, services }) => {
+const CategoryCard = ({ service }) => {
     return (
         <Link to={`/services/category/${service.toLowerCase()}`}>
             <li className="flex justify-center py-4 border-t border-b border-slate-800 hover:bg-indigo-200">

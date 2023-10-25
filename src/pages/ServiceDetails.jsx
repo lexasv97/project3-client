@@ -42,13 +42,14 @@ const ServiceDetails = ({ allServices }) => {
     axiosDelete(`/services/${serviceId}`)
       .then((response) => {
         navigate('/all-categories')
+        window.location.reload()
       })
       .catch((err) => console.log(err));
   }
 
   const isOwner = () => {
-    console.log("Is owner =====>", user._id, service.user, service)
-    return user._id === service.user
+    // console.log("Is owner =====>", user._id, service.user, service)
+    return user && user._id === service.user
 
   }
 
@@ -65,6 +66,10 @@ const ServiceDetails = ({ allServices }) => {
     )
   }
 
+  const isUser = () => {
+    return user && !user.isBusiness
+  }
+
   return (
     <div className="">
       {
@@ -75,46 +80,50 @@ const ServiceDetails = ({ allServices }) => {
 
             {
               isOwner() &&
-              <div className="flex flex-row justify-evenly">
-                <div className="bg-amber-500 flex justify-center w-1/4 text-white py-2 my-2 border border-slate-600 rounded-3xl">
-                  <Link to={`/services/update/${serviceId}`} className="hover:text-black transition cursor-pointer">Update service</Link>
+              <div className="flex flex-row justify-evenly border border-slate-800 grid grid-cols-2 px-10">
+                <div className="flex justify-center">
+                  <div className="bg-amber-500 flex justify-center w-1/2 text-white text-xl py-2 my-2 border border-slate-600 rounded-3xl">
+                    <Link to={`/services/update/${serviceId}`} className="hover:text-black transition cursor-pointer">Update service</Link>
+                  </div>
                 </div>
-                <div className="bg-amber-500 flex justify-center w-1/4 text-white py-2 my-2 border border-slate-600 rounded-3xl">
-                  <button onClick={handleDelete} className="hover:text-black transition cursor-pointer">Delete service</button>
+                <div className="flex justify-center">
+                  <PopUpMessage task={handleDelete} title='Delete service' />
                 </div>
               </div>
             }
 
+            <div className="flex px-2 py-2">
+              <div className="flex flex-col items-center">
+                <img className="w-4/5 pb-2 rounded-3xl" src={service.image} alt="service-image" />
 
-            <div className="flex justify-center px-2 py-2">
-              <div className="w-2/5">
-                <img className="w-full" src={service.image} alt="service-image" />
-
-                <MapContainer />
                 <p>{service.location}</p>
               </div>
-              <div className="w-2/5">
-                <h3>{service.name}</h3>
-                <p>{service.category}</p>
+              <div className="">
+                <h3 className="text-xl">{service.name}</h3>
+                <Link to={`/services/category/${service.category.toLowerCase()}`}>
+                  <span className="border-b text-gray-500 border-grey-500 hover:text-indigo-500 hover:border-indigo-500 transition cursor-pointer">{service.category}</span>
+                </Link>
                 <p>{service.description}</p>
 
-                {/* {
-                !user.isBusiness && */}
+                {
+                  isUser() &&
 
-                <div className="border-t border-slate-800">
-                  <AddReview refreshService={getService} serviceId={serviceId} />
-                </div>
-                {/* } */}
+                  <div className="border-t border-slate-800">
+                    <AddReview refreshService={getService} serviceId={serviceId} />
+                  </div>
+                }
 
               </div>
             </div>
           </div>
-
+          <div className="flex justify-center py-4 bg-gradient-to-t from-white to-indigo-50 border-t border-slate-800">
+            <MapContainer />
+          </div>
           <div className="border-t border-slate-800">
             {
               service.reviews.length ?
 
-                <div>
+                <div className="pb-4">
                   <div className="flex items-center justify-center py-2 border-b border-slate-800">
                     <div className="flex flew-row justify-evenly w-1/2">
                       <div>

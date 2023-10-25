@@ -69,6 +69,7 @@ const UserSignup = () => {
               name="name"
               value={name}
               onChange={handleName}
+              required
             />
             <div>
               <BiUser className='text-black' />
@@ -82,6 +83,7 @@ const UserSignup = () => {
               name="email"
               value={email}
               onChange={handleEmail}
+              required
             />
             <div>
               <MdOutlineAlternateEmail className='text-black' />
@@ -107,6 +109,7 @@ const UserSignup = () => {
               name="password"
               value={password}
               onChange={handlePassword}
+              required
             />
             <div>
               <AiOutlineUnlock className='text-black' />
