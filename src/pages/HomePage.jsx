@@ -29,23 +29,37 @@ const HomePage = ({ allServices, allReviews }) => {
     // the item selected
     console.log("item selected", item)
     setSearch(item)
-    
+
   }
 
   const handleOnFocus = () => {
     // console.log('Focused')
   }
 
+  const slicedArray = (arr) => {
+    return arr.slice(0,5)
+  }
+
   const formatResult = (item) => {
     return (
       <>
-        <span style={{ display: 'block', textAlign: 'left' }}>name: {item.name}</span>
-        <span style={{ display: 'block', textAlign: 'left' }}>category: {item.category}</span>
+        <span style={{ display: 'block', textAlign: 'left' }}>{item.name}</span>
+        <span style={{ display: 'block', textAlign: 'left' }} className="border-b text-gray-500 border-grey-500">{item.category}</span>
       </>
     )
   }
 
+  let mapped = allServices.map((service) => {
+    let object = {
+      id: service._id,
+      name: service.name,
+      category: service.category
+    }
+    return object
+  })
+
   //
+  console.log("mapped =====>", mapped)
 
   const [limitedReviews, setLimitedReviews] = useState([])
 
@@ -92,7 +106,8 @@ const HomePage = ({ allServices, allReviews }) => {
             <form className="w-3/4 pb-2">
               <ReactSearchAutocomplete
                 placeholder="Search for..."
-                items={allServices}
+                items={mapped}
+                fuseOptions={{ keys: ["name", "category"] }}
                 onSearch={handleOnSearch}
                 onHover={handleOnHover}
                 onSelect={handleOnSelect}
@@ -101,9 +116,9 @@ const HomePage = ({ allServices, allReviews }) => {
                 formatResult={formatResult}
               />
               <div className="flex justify-center">
-              <div className="bg-amber-500 flex justify-center w-1/4 text-white text-xl py-2 my-2 border border-slate-600 rounded-3xl">
-                <Link to={`/services/${search._id}`} className="hover:text-black transition cursor-pointer">Search</Link>
-              </div>
+                <div className="bg-amber-500 flex justify-center w-1/4 text-white text-xl py-2 my-2 border border-slate-600 rounded-3xl">
+                  <Link to={`/services/${search.id}`} className="hover:text-black transition cursor-pointer">Search</Link>
+                </div>
               </div>
             </form>
           </div>

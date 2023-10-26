@@ -20,6 +20,7 @@ export default {
     "./src/components/AddReview.jsx",
     "./src/components/CategoryCard.jsx",
     "./src/components/Footer.jsx",
+    "./src/components/LocationForm.jsx",
     "./src/components/ItemCard.jsx",
     "./src/components/MapContainer.jsx",
     "./src/components/Navbar.jsx",

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { post } from "../services/authService";
+import LocationForm from "../components/LocationForm";
 
 const AddService = ({ getAllServices, updateServices }) => {
 
@@ -9,13 +10,15 @@ const AddService = ({ getAllServices, updateServices }) => {
     const [image, setImage] = useState("https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png");
     const [category, setCategory] = useState("");
     const [location, setLocation] = useState("");
+    const [latitude, setLatitude] = useState(0)
+    const [longitude, setLongitude] = useState(0)
 
     const navigate = useNavigate()
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const body = { name, description, image, category, location }
+        const body = { name, description, image, category, location, latitude, longitude }
 
         post('/services/new', body)
             .then((response) => {
@@ -26,6 +29,8 @@ const AddService = ({ getAllServices, updateServices }) => {
                 setImage("")
                 setCategory("")
                 setLocation("")
+                setLatitude(0)
+                setLongitude(0)
                 navigate(-1)
             })
             .catch(err => {
@@ -39,9 +44,9 @@ const AddService = ({ getAllServices, updateServices }) => {
                 <h1 className="text-3xl font-bold py-2 flex justify-center">Add new service</h1>
 
                 <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center w-3/5">
-                    <div className="flex items-center justify-center my-2 justify-evenly w-full">
+                    <div className="flex items-center justify-center my-2 w-full">
                         <input
-                            className="w-11/12 border border-slate-600 py-2 rounded-3xl px-2"
+                            className="w-11/12 border border-slate-600 py-2 rounded-3xl px-3"
                             placeholder="name"
                             type="text"
                             name="name"
@@ -50,9 +55,9 @@ const AddService = ({ getAllServices, updateServices }) => {
                             required
                         />
                     </div>
-                    <div className="flex items-center justify-center my-2 justify-evenly w-full">
+                    <div className="flex items-center justify-center my-2 w-full">
                         <select
-                            className="w-11/12 border border-slate-600 py-2 rounded-3xl px-2"
+                            className="w-11/12 border border-slate-600 py-2 rounded-3xl px-3"
                             name="category"
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
@@ -77,9 +82,9 @@ const AddService = ({ getAllServices, updateServices }) => {
                             <option value={"Junk-removal"}>Junk removal</option>
                         </select>
                     </div>
-                    <div className="flex items-center justify-center my-2 justify-evenly w-full">
+                    <div className="flex items-center justify-center my-2 w-full">
                         <input
-                            className="w-11/12 border border-slate-600 py-2 rounded-3xl px-2"
+                            className="w-11/12 border border-slate-600 py-2 rounded-3xl px-3"
                             placeholder="image"
                             type="text"
                             name="image"
@@ -88,27 +93,16 @@ const AddService = ({ getAllServices, updateServices }) => {
                             required
                         />
                     </div>
-                    <div className="flex items-center justify-center my-2 justify-evenly w-full">
-                        <input
-                            className="w-11/12 border border-slate-600 py-2 rounded-3xl px-2"
-                            placeholder="location"
-                            type="text"
-                            name="location"
-                            value={location}
-                            onChange={(e) => setLocation(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="flex items-center justify-center my-2 justify-evenly w-full">
+                    <LocationForm setLatitude={setLatitude} setLongitude={setLongitude} setLocation={setLocation} />
+                    <div className="flex items-center justify-center my-2 w-full">
                         <textarea
-                            className="w-11/12 border border-slate-600 py-2 rounded-3xl px-2"
+                            className="w-11/12 border border-slate-600 py-2 rounded-3xl px-3"
                             placeholder="description"
                             type="text"
                             name="description"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                             rows="6"
-                            required
                         />
                     </div>
                     <div className="bg-amber-500 text-white flex justify-center w-1/2 py-2 mt-2 mb-4 border border-slate-600 rounded-3xl">

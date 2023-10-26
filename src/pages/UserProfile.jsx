@@ -23,19 +23,23 @@ const UserProfile = ({ allReviews }) => {
     }, [allReviews, user])
 
     return (
-        <div className="bg-gradient-to-t from-white to-indigo-50">
+        <div className="">
             {
                 user &&
                 <div>
                     <span className="text-3xl font-bold py-3 flex justify-center">User profile</span>
                     <h3 className="text-xl flex justify-center pb-2 border-b border-slate-800">Welcome to your business page, {user.name}!</h3>
 
-                    <div className="flex flex-row justify-evenly border-b border-slate-800 py-2">
-                        <div className="bg-amber-500 flex justify-center w-1/4 text-white py-2 my-2 border border-slate-600 rounded-3xl">
-                            <Link to='/all-categories' className="hover:text-black transition cursor-pointer flex justify-center">Check services</Link>
+                    <div className="flex border-b border-slate-800 grid grid-cols-1 md:grid-cols-2 px-10">
+                        <div className="flex justify-center">
+                            <div className="bg-amber-500 flex justify-center w-1/2 text-white text-xl py-2 my-2 border border-slate-600 rounded-3xl">
+                                <Link to='/all-categories' className="hover:text-black transition cursor-pointer">Check services</Link>
+                            </div>
                         </div>
-                        <div className="bg-amber-500 flex justify-center w-1/4 text-white py-2 my-2 border border-slate-600 rounded-3xl">
-                            <Link to='/users/update-profile' className="hover:text-black transition cursor-pointer flex justify-center">Update profile</Link>
+                        <div className="flex justify-center">
+                            <div className="bg-amber-500 flex justify-center w-1/2 text-white text-xl py-2 my-2 border border-slate-600 rounded-3xl">
+                                <Link to='/users/update-profile' className="hover:text-black transition cursor-pointer">Update profile</Link>
+                            </div>
                         </div>
                     </div>
                     <div className="flex px-2 py-2 grid grid-cols-2">

@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
-const CategoryCard = ({ service }) => {
+const CategoryCard = ({ category }) => {
     return (
-        <Link to={`/services/category/${service.toLowerCase()}`}>
+        <Link to={`/services/category/${category.toLowerCase()}`}>
             <li className="flex justify-center py-4 border-b border-slate-800 hover:bg-indigo-200">
-                {service}
+                {category.replace('-', ' ')}
             </li>
         </Link>
     );

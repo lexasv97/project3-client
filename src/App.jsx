@@ -105,7 +105,7 @@ function App() {
         //     />
         //   </div>
         //   :
-        <div>
+        <div className=''>
           <Navbar />
 
           <Routes>
@@ -142,7 +142,7 @@ function App() {
 
             <Route path='/services/category/:thisCategory' element={<CategoryPage allServices={allServices} />} />
 
-            <Route path='/services/:serviceId' element={<ServiceDetails allServices={allServices} />} />
+            <Route path='/services/:serviceId' element={<ServiceDetails />} />
 
             <Route path='/services/update/:serviceId' element={<UpdateService />} />
 

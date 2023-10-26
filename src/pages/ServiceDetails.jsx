@@ -8,7 +8,7 @@ import { AuthContext } from "../context/auth.context";
 import MapContainer from "../components/MapContainer";
 import ReviewCard from "../components/ReviewCard";
 
-const ServiceDetails = ({ allServices }) => {
+const ServiceDetails = () => {
 
   const { user } = useContext(AuthContext);
 
@@ -77,10 +77,9 @@ const ServiceDetails = ({ allServices }) => {
         <div className="flex flex-col">
           <div className="bg-indigo-50">
             <h1 className="text-3xl font-bold py-2 flex justify-center border-b border-slate-800 ">Service Details</h1>
-
             {
               isOwner() &&
-              <div className="flex flex-row justify-evenly border border-slate-800 grid grid-cols-2 px-10">
+              <div className="flex border-b border-slate-800 grid grid-cols-1 md:grid-cols-2 px-10">
                 <div className="flex justify-center">
                   <div className="bg-amber-500 flex justify-center w-1/2 text-white text-xl py-2 my-2 border border-slate-600 rounded-3xl">
                     <Link to={`/services/update/${serviceId}`} className="hover:text-black transition cursor-pointer">Update service</Link>
@@ -91,10 +90,9 @@ const ServiceDetails = ({ allServices }) => {
                 </div>
               </div>
             }
-
-            <div className="flex px-2 py-2">
-              <div className="flex flex-col items-center">
-                <img className="w-4/5 pb-2 rounded-3xl" src={service.image} alt="service-image" />
+            <div className="flex flex-col md:flex-row px-2 py-2">
+              <div className="flex flex-col items-center border-b border-slate-800 md:border-none">
+                <img className="w-2/5 md:w-4/5 pb-2 rounded-3xl" src={service.image} alt="service-image" />
 
                 <p>{service.location}</p>
               </div>
@@ -104,21 +102,21 @@ const ServiceDetails = ({ allServices }) => {
                   <span className="border-b text-gray-500 border-grey-500 hover:text-indigo-500 hover:border-indigo-500 transition cursor-pointer">{service.category}</span>
                 </Link>
                 <p>{service.description}</p>
-
                 {
                   isUser() &&
-
                   <div className="border-t border-slate-800">
                     <AddReview refreshService={getService} serviceId={serviceId} />
                   </div>
                 }
-
               </div>
             </div>
           </div>
-          <div className="flex justify-center py-4 bg-gradient-to-t from-white to-indigo-50 border-t border-slate-800">
-            <MapContainer />
-          </div>
+          {
+            service.latitude && service.longitude &&
+            <div className="flex justify-center py-4 bg-gradient-to-t from-white to-indigo-50 border-t border-slate-800">
+              <MapContainer lat={service.latitude} lng={service.longitude} />
+            </div>
+          }
           <div className="border-t border-slate-800">
             {
               service.reviews.length ?

@@ -63,7 +63,7 @@ const UserSignup = () => {
         <form onSubmit={handleSignupSubmit} className="flex flex-col items-center justify-center w-3/5">
 
           <div className="flex items-center justify-center my-2 justify-evenly w-full">
-            <input className="w-11/12 border border-slate-600 py-2 rounded-3xl px-2"
+            <input className="w-11/12 border border-slate-600 py-2 rounded-3xl px-3"
               placeholder="name"
               type="name"
               name="name"
@@ -77,7 +77,7 @@ const UserSignup = () => {
           </div>
 
           <div className="flex items-center justify-center my-2 justify-evenly w-full">
-            <input className="w-11/12 border border-slate-600 py-2 rounded-3xl px-2"
+            <input className="w-11/12 border border-slate-600 py-2 rounded-3xl px-3"
               placeholder="email"
               type="email"
               name="email"
@@ -91,7 +91,7 @@ const UserSignup = () => {
           </div>
 
           <div className="flex items-center justify-center my-2 justify-evenly w-full">
-            <input className="w-11/12 border border-slate-600 py-2 rounded-3xl px-2"
+            <input className="w-11/12 border border-slate-600 py-2 rounded-3xl px-3"
               placeholder="+12223334455"
               type="phone"
               name="phone"
@@ -103,7 +103,7 @@ const UserSignup = () => {
           </div>
 
           <div className="flex items-center justify-center my-2 justify-evenly w-full">
-            <input className="w-11/12 border border-slate-600 py-2 rounded-3xl px-2"
+            <input className="w-11/12 border border-slate-600 py-2 rounded-3xl px-3"
               placeholder="password"
               type="password"
               name="password"

@@ -8,7 +8,7 @@ const SearchList = ({ filteredServices }) => {
 
     return (
         <div>
-            {noDuplicates(filteredServices).map(service => <CategoryCard key={service._id} service={service} />)}
+            {noDuplicates(filteredServices).map(category => <CategoryCard key={category._id} category={category} />)}
         </div>
     )
 }
