@@ -153,14 +153,10 @@ const HomePage = ({ allServices, allReviews }) => {
       </div>
       <div>
 
-        {allReviews.length ?  // limitedReviews.length && 
+        {allReviews.slice(0,5).length ?  
           <div>
             {
-
-              // limitedReviews.map((review) => {
-              //   return (<ReviewCard key={review._id} review={review} />)
-              // })
-              allReviews.map((review) => {
+              allReviews.slice(0,5).map((review) => {
                 return (<ReviewCard key={review._id} review={review} />)
               })
             }
