@@ -8,7 +8,7 @@ import 'aos/dist/aos.css';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete' //
 import SearchList from "../components/SearchList"
 
-const HomePage = ({ allServices, allReviews }) => {
+const HomePage = ({ allServices, allReviews, setSearchReady }) => {
 
   const [search, setSearch] = useState({})
 
@@ -29,15 +29,11 @@ const HomePage = ({ allServices, allReviews }) => {
     // the item selected
     console.log("item selected", item)
     setSearch(item)
-
+    setSearchReady(true)
   }
 
   const handleOnFocus = () => {
     // console.log('Focused')
-  }
-
-  const slicedArray = (arr) => {
-    return arr.slice(0,5)
   }
 
   const formatResult = (item) => {
@@ -59,24 +55,15 @@ const HomePage = ({ allServices, allReviews }) => {
   })
 
   //
-  console.log("mapped =====>", mapped)
+  //console.log("mapped =====>", mapped)
 
-  const [limitedReviews, setLimitedReviews] = useState([])
-
-  useEffect(() => {
-    console.log("search selected", search)
-  }, [search])
-
-  useEffect(() => {
-    let newArr = []
-    for (let i = 0; i < 2; i++) {
-      newArr.push(allReviews[i])
-    }
-    setLimitedReviews(newArr)
-  }, [])
+  // useEffect(() => {
+  //   //console.log("search selected", search)
+  // }, [search])
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
+    setSearchReady(false)
   }, [])
 
   return (
@@ -102,21 +89,23 @@ const HomePage = ({ allServices, allReviews }) => {
 
           <div className="w-full flex justify-center text-xl border-b border-slate-800">
 
-            {/* <SearchName allServices={allServices} /> */}
             <form className="w-3/4 pb-2">
-              <ReactSearchAutocomplete
-                placeholder="Search for..."
-                items={mapped}
-                fuseOptions={{ keys: ["name", "category"] }}
-                onSearch={handleOnSearch}
-                onHover={handleOnHover}
-                onSelect={handleOnSelect}
-                onFocus={handleOnFocus}
-                autoFocus
-                formatResult={formatResult}
-              />
+              <div className="z-5 ">
+                <ReactSearchAutocomplete
+                  className=""
+                  placeholder="Search for..."
+                  items={mapped}
+                  fuseOptions={{ keys: ["name", "category"] }}
+                  onSearch={handleOnSearch}
+                  onHover={handleOnHover}
+                  onSelect={handleOnSelect}
+                  onFocus={handleOnFocus}
+                  autoFocus
+                  formatResult={formatResult}
+                />
+              </div>
               <div className="flex justify-center">
-                <div className="bg-amber-500 flex justify-center w-1/4 text-white text-xl py-2 my-2 border border-slate-600 rounded-3xl">
+                <div className="bg-amber-500 flex justify-center w-1/2 md:w-1/4 text-white text-xl py-2 my-2 border border-slate-600 rounded-3xl">
                   <Link to={`/services/${search.id}`} className="hover:text-black transition cursor-pointer">Search</Link>
                 </div>
               </div>
@@ -153,10 +142,10 @@ const HomePage = ({ allServices, allReviews }) => {
       </div>
       <div>
 
-        {allReviews.slice(0,5).length ?  
+        {allReviews.slice(0, 5).length ?
           <div>
             {
-              allReviews.slice(0,5).map((review) => {
+              allReviews.sort((a, b) => 0.5 - Math.random()).slice(0, 5).map((review) => {
                 return (<ReviewCard key={review._id} review={review} />)
               })
             }

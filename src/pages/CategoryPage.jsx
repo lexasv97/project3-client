@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ServiceCard from "../components/ServiceCard";
 
-const CategoryPage = ({ allServices }) => {
+const CategoryPage = ({ allServices, setSearchReady }) => {
 
     const [services, setServices] = useState([])
 
@@ -10,12 +10,13 @@ const CategoryPage = ({ allServices }) => {
 
     useEffect(() => {
         if (allServices && thisCategory) {
-            console.log("All services =====>", allServices)
+           // console.log("All services =====>", allServices)
             let searchedServices = allServices.filter((service) => service.category.toLowerCase() === thisCategory.toLowerCase())
-            console.log("Searched services ====>", searchedServices)
+           // console.log("Searched services ====>", searchedServices)
             setServices(searchedServices)
-            console.log("Services ====>", services)
+           // console.log("Services ====>", services)
         }
+        setSearchReady(true)
     }, [thisCategory, allServices])
 
     return (

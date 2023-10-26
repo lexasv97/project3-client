@@ -14,10 +14,10 @@ const UserProfile = ({ allReviews }) => {
 
     useEffect(() => {
         if (allReviews.length && user) {
-            console.log("All reviews =====>", allReviews)
-            console.log("User =====>", user)
+            //console.log("All reviews =====>", allReviews)
+           // console.log("User =====>", user)
             let searchedReviews = allReviews.filter((review) => review.user._id === user._id)
-            console.log("Searched reviews====>", searchedReviews)
+            //console.log("Searched reviews====>", searchedReviews)
             setUserReviews(searchedReviews)
         }
     }, [allReviews, user])

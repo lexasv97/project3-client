@@ -22,7 +22,7 @@ const AddService = ({ getAllServices, updateServices }) => {
 
         post('/services/new', body)
             .then((response) => {
-                console.log("New Service =====>", response.data)
+                //console.log("New Service =====>", response.data)
                 updateServices(response.data)
                 setName("")
                 setDescription("")
@@ -102,6 +102,7 @@ const AddService = ({ getAllServices, updateServices }) => {
                             name="description"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
+                            required
                             rows="6"
                         />
                     </div>

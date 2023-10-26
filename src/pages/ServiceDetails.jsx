@@ -22,8 +22,8 @@ const ServiceDetails = () => {
 
     get(`/services/${id}`)
       .then((response) => {
-        console.log("Found project ==>", response.data)
-        console.log("serviceId from params =====>", serviceId)
+       // console.log("Found project ==>", response.data)
+       // console.log("serviceId from params =====>", serviceId)
         setService(response.data)
       })
       .catch((err) => {

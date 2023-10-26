@@ -1,4 +1,3 @@
-
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom'
@@ -23,6 +22,8 @@ function App() {
   const [allServices, setAllServices] = useState([])
 
   const [allReviews, setAllReviews] = useState([])
+
+  const [searchReady, setSearchReady] = useState(false)
 
   const getAllReviews = () => {
     get('/reviews')
@@ -91,6 +92,10 @@ function App() {
     return !isLoggedIn ? <Outlet /> : <Navigate to='/' />
   }
 
+  const IsSearchReady = () => {
+    return searchReady ? <Outlet /> : <Navigate to='/' />
+  }
+
   return (
     <>
       {
@@ -109,7 +114,7 @@ function App() {
           <Navbar />
 
           <Routes>
-            <Route path='/' element={<HomePage allServices={allServices} allReviews={allReviews} />} />
+            <Route path='/' element={<HomePage allServices={allServices} allReviews={allReviews} setSearchReady={setSearchReady} />} />
 
             <Route element={<NotLoggedIn />}>
 
@@ -132,7 +137,7 @@ function App() {
 
             <Route element={<IsBusiness />}>
 
-              <Route path='/business-profile' element={<BusinessProfile allServices={allServices} />} />
+              <Route path='/business-profile' element={<BusinessProfile allServices={allServices} setSearchReady={setSearchReady} />} />
 
             </Route>
 
@@ -140,9 +145,11 @@ function App() {
 
             <Route path='/add-service' element={<AddService allServices={getAllServices} updateServices={updateServices} />} />
 
-            <Route path='/services/category/:thisCategory' element={<CategoryPage allServices={allServices} />} />
+            <Route path='/services/category/:thisCategory' element={<CategoryPage allServices={allServices} setSearchReady={setSearchReady} />} />
 
-            <Route path='/services/:serviceId' element={<ServiceDetails />} />
+            <Route element={<IsSearchReady />}>
+              <Route path='/services/:serviceId' element={<ServiceDetails />} />
+            </Route>
 
             <Route path='/services/update/:serviceId' element={<UpdateService />} />
 

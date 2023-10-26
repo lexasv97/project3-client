@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 import ServiceCard from "../components/ServiceCard"
 import { Link } from "react-router-dom"
 
-const BusinessProfile = ({ allServices }) => {
+const BusinessProfile = ({ allServices, setSearchReady }) => {
 
     const { user, logOut } = useContext(AuthContext)
 
@@ -13,11 +13,12 @@ const BusinessProfile = ({ allServices }) => {
 
     useEffect(() => {
         if (allServices.length && user) {
-            console.log("All services =====>", allServices)
-            console.log("User =====>", user)
+           // console.log("All services =====>", allServices)
+          //  console.log("User =====>", user)
             let searchedServices = allServices.filter((service) => service.user._id === user._id)
-            console.log("Searched sevrices====>", searchedServices)
+           // console.log("Searched sevrices====>", searchedServices)
             setServices(searchedServices)
+            setSearchReady(true)
         }
     }, [allServices, user])
 

@@ -27,6 +27,7 @@ const LocationForm = ({ setLatitude, setLongitude, setLocation }) => {
   };
 
   return (
+    //window.google.maps.places &&
     <div className='w-full'>
       <PlacesAutocomplete
         value={address}

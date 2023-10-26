@@ -20,9 +20,9 @@ const UpdateProfile = () => {
 
     const { user } = useContext(AuthContext)
 
-    if (user && user.isBusiness) {
-        setIsBusiness(true)
-    }
+    // if (user && user.isBusiness) {
+    //     setIsBusiness(true)
+    // }
 
     const navigate = useNavigate();
 
