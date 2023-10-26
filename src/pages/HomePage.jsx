@@ -153,7 +153,7 @@ const HomePage = ({ allServices, allReviews }) => {
       </div>
       <div>
 
-        {allReviews.length &&  // limitedReviews.length && 
+        {allReviews.length ?  // limitedReviews.length && 
           <div>
             {
 
@@ -165,6 +165,8 @@ const HomePage = ({ allServices, allReviews }) => {
               })
             }
           </div>
+          :
+          <div></div>
         }
 
       </div>

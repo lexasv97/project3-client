@@ -31,6 +31,7 @@ const ReviewCard = ({ review }) => {
     }
 
     return (
+        review &&
         <div className="flex flex-col items-center">
             <div data-aos="fade-right" className="bg-indigo-50 rounded-3xl mx-4 mt-4 px-4 border border-slate-600 w-3/4">
                 <div className="flex items-center py-2 space-x-4 pl-10">
