@@ -9,6 +9,10 @@ import { AiOutlineUnlock } from "react-icons/ai";
 import { BiUser } from "react-icons/bi";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { AiOutlinePhone } from "react-icons/ai"
+import { AiOutlineFileImage } from "react-icons/ai"
+
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input/input'
 
 const UserSignup = () => {
 
@@ -17,6 +21,7 @@ const UserSignup = () => {
   const [name, setName] = useState("");
   const [isBusiness, setIsBusiness] = useState(false)
   const [phone, setPhone] = useState(0)
+  const [profileImage, setProfileImage] = useState("https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg")
 
   const [errorMessage, setErrorMessage] = useState(undefined);
 
@@ -27,7 +32,7 @@ const UserSignup = () => {
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
   const handleName = (e) => setName(e.target.value);
-  const hanglePhone = (e) => setPhone(e.target.value);
+  const handleProfileImage = (e) => setProfileImage(e.target.value)
 
   const handleToggle = (e) => {
     setIsBusiness(!isBusiness)
@@ -36,7 +41,7 @@ const UserSignup = () => {
   const handleSignupSubmit = (e) => {
     e.preventDefault();
     // Create an object representing the request body
-    const requestBody = { email, phone, password, name, isBusiness };
+    const requestBody = { email, phone, password, name, isBusiness, profileImage };
 
     // Make an axios request to the API
     // If the POST request is a successful redirect to the login page
@@ -61,6 +66,19 @@ const UserSignup = () => {
         <span className="text-3xl font-bold my-3">Register</span>
 
         <form onSubmit={handleSignupSubmit} className="flex flex-col items-center justify-center w-4/5 md:w-3/5">
+
+          <div className="flex items-center justify-center my-2 justify-evenly w-full">
+            <input
+              className="w-11/12 border border-slate-600 py-2 rounded-3xl px-3"
+              placeholder="profile image"
+              type="text"
+              name="profileImage"
+              value={profileImage}
+              onChange={handleProfileImage}
+              required
+            />
+             <AiOutlineFileImage className='text-black' />
+          </div>
 
           <div className="flex items-center justify-center my-2 justify-evenly w-full">
             <input className="w-11/12 border border-slate-600 py-2 rounded-3xl px-3"
@@ -91,11 +109,14 @@ const UserSignup = () => {
           </div>
 
           <div className="flex items-center justify-center my-2 justify-evenly w-full">
-            <input className="w-11/12 border border-slate-600 py-2 rounded-3xl px-3"
-              placeholder="+12223334455"
+            <PhoneInput className="w-11/12 border border-slate-600 py-2 rounded-3xl px-3"
+              placeholder="(222) 333-4455"
+              country="US"
               type="phone"
               name="phone"
-              onChange={hanglePhone}
+              maxLength = "14"
+              value={phone}
+              onChange={setPhone}
             />
             <div>
               <AiOutlinePhone className='text-black' />
@@ -125,7 +146,7 @@ const UserSignup = () => {
                 name="isBusiness"
                 value={isBusiness}
                 onChange={handleToggle} />
-              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+              <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600">
               </div>
             </label>
 

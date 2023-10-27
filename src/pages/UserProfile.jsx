@@ -15,7 +15,7 @@ const UserProfile = ({ allReviews }) => {
     useEffect(() => {
         if (allReviews.length && user) {
             //console.log("All reviews =====>", allReviews)
-           // console.log("User =====>", user)
+            // console.log("User =====>", user)
             let searchedReviews = allReviews.filter((review) => review.user._id === user._id)
             //console.log("Searched reviews====>", searchedReviews)
             setUserReviews(searchedReviews)
@@ -42,9 +42,9 @@ const UserProfile = ({ allReviews }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex px-2 py-2 grid grid-cols-2">
+                    <div className="flex flex-col md:flex-row px-2 py-2">
                         <div className="flex items-center justify-center py-2">
-                            <img className="w-2/5 pb-2 rounded-3xl" src={user.profileImage} alt="profileImage" />
+                            <img className="w-1/5 md:w-2/5 pb-2 rounded-3xl" src={user.profileImage} alt="profileImage" />
                         </div>
                         <div className="flex flex-col justify-center pr-20">
                             <div className="border-b border-slate-600 mb-2">
@@ -59,7 +59,7 @@ const UserProfile = ({ allReviews }) => {
                                 user.phone &&
                                 <div className="border-b border-slate-600 mb-2">
                                     <h3 className="text-xl">Phone number</h3>
-                                    <p>{user.phone}</p>
+                                    <p>+{user.phone}</p>
                                 </div>
                             }
                         </div>
@@ -79,8 +79,10 @@ const UserProfile = ({ allReviews }) => {
                         </div>
                         : <p>No added services yet</p>
                     }
-                    <div className="flex justify-center">
-                        <PopUpMessage task={logOut} title='Logout' />
+                    <div className="flex justify-center border-t border-slate-800">
+                        <div className="flex justify-center w-full md:w-1/2">
+                            <PopUpMessage task={logOut} title='Logout' />
+                        </div>
                     </div>
                 </div>
             }
