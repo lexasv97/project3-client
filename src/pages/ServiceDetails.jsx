@@ -7,6 +7,8 @@ import PopUpMessage from "../components/PopUpMessage";
 import { AuthContext } from "../context/auth.context";
 import MapContainer from "../components/MapContainer";
 import ReviewCard from "../components/ReviewCard";
+import { RotatingLines } from 'react-loader-spinner'
+
 
 const ServiceDetails = () => {
 
@@ -73,7 +75,7 @@ const ServiceDetails = () => {
   return (
     <div className="">
       {
-        service &&
+        service ?
         <div className="flex flex-col">
           <div className="bg-indigo-50">
             <h1 className="text-3xl font-bold py-2 flex justify-center border-b border-slate-800 ">Service Details</h1>
@@ -162,6 +164,14 @@ const ServiceDetails = () => {
           </div>
 
         </div>
+        : <div className="bg-indigo-50 h-screen flex flex-col justify-center items-center">
+             <RotatingLines
+              height={100}
+              width={100}
+              radius={5}
+              color="#f59e0b"
+              visible={true}
+            /></div>
       }
     </div>
   )
