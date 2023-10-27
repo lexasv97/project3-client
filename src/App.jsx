@@ -110,7 +110,8 @@ function App() {
         //     />
         //   </div>
         //   :
-        <div className='flex flex-col min-h-screen'>
+        <div className='flex flex-col min-h-screen justify-between'>
+          <div>
           <Navbar />
 
           <Routes>
@@ -156,6 +157,8 @@ function App() {
             <Route path='/users/update-profile' element={<UpdateProfile />} />
 
           </Routes>
+
+          </div>
 
           <Footer />
         </div>
