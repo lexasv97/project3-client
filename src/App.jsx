@@ -63,13 +63,13 @@ function App() {
 
   const { user, isLoggedIn } = useContext(AuthContext)
 
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
-    }, 1000)
-  }, [])
+  // const [loading, setLoading] = useState(false);
+  // useEffect(() => {
+  //   setLoading(true)
+  //   setTimeout(() => {
+  //     setLoading(false)
+  //   }, 1000)
+  // }, [])
 
   // const getBusinessStatus = () => {
   //   return localStorage.getItem('isBusiness')
