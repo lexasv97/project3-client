@@ -11,7 +11,7 @@ const ServiceCard = ({ service }) => {
     })
     return (
       <div>
-        {sum / reviews.length}
+        {Math.round((sum / reviews.length) * 100) / 100}
       </div>
     )
   }

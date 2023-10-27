@@ -90,9 +90,9 @@ const ServiceDetails = () => {
                 </div>
               </div>
             }
-            <div className="flex flex-col md:flex-row px-2 py-2">
+            <div className="flex flex-col md:flex-row px-8 py-2">
               <div className="flex flex-col items-center border-b border-slate-800 md:border-none">
-                <img className="w-2/5 md:w-4/5 pb-2 rounded-3xl" src={service.image} alt="service-image" />
+                <img className="w-3/5 md:w-4/5 pb-2 rounded-3xl" src={service.image} alt="service-image" />
 
                 <p>{service.location}</p>
               </div>

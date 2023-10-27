@@ -103,6 +103,7 @@ const UpdateService = () => {
                             required
                         />
                     </div>
+                    <LocationForm />
                     <div className="flex items-center justify-center my-2 w-full">
                         <textarea
                             className="w-11/12 border border-slate-600 py-2 rounded-3xl px-3"
@@ -115,7 +116,6 @@ const UpdateService = () => {
                             rows="6"
                         />
                     </div>
-                    <LocationForm />
                     <div className="bg-amber-500 text-white flex justify-center w-1/2 py-2 mt-2 mb-4 border border-slate-600 rounded-3xl">
                         <button className="hover:text-black transition cursor-pointer" type='submit'>Update service</button>
                     </div>
