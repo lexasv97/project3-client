@@ -23,12 +23,12 @@ function App() {
 
   const [allReviews, setAllReviews] = useState([])
 
-  const [searchReady, setSearchReady] = useState(false)
+  const [searchReady, setSearchReady] = useState(true)
 
   const getAllReviews = () => {
     get('/reviews')
       .then((response) => {
-        console.log("Reviews ==>", response.data)
+       // console.log("Reviews ==>", response.data)
         setAllReviews(response.data)
       })
       .catch((err) => {
@@ -43,7 +43,7 @@ function App() {
   const getAllServices = () => {
     get('/services')
       .then((response) => {
-        console.log("Services ==>", response.data)
+       // console.log("Services ==>", response.data)
         setAllServices(response.data)
       })
       .catch((err) => {

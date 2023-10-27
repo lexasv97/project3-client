@@ -33,7 +33,7 @@ function AuthProvider({ children }) {
                 .then((response) => {
                     // If the server verifies that the JWT token is valid  
                     const user = response.data;
-                    console.log('USER =====>', user)
+                   // console.log('USER =====>', user)
                     // if (user.isUser) {
                     //   localStorage.setItem('isUser', true)
                     // }

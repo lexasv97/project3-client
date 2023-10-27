@@ -52,7 +52,7 @@ const AddReview = ({ refreshService, serviceId }) => {
                             onChange={(e) => setRating(e.target.value)}
                             required
                         >
-                            <option hidden default value="" disabled="disabled">Select</option>
+                            <option hidden default value={0} disabled="disabled">Select</option>
                             <option value="5">5</option>
                             <option value="4">4</option>
                             <option value="3">3</option>
