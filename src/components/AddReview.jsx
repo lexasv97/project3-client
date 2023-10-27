@@ -24,8 +24,8 @@ const AddReview = ({ refreshService, serviceId }) => {
     }
 
     return (
-        <div>
-            <h1 className="text-xl py-2 flex justify-center">Leave a review</h1>
+        <div className="flex w-full md:w-3/4 lg:w-1/2">
+            <h1 className="text-xl py-2 flex justify-center items-center">Leave a review</h1>
 
             <form onSubmit={handleSubmit} className="flex grid grid-cols-2 gap-2 px-2 py-2">
 
