@@ -101,6 +101,7 @@ const UpdateProfile = () => {
                             name="name"
                             value={name}
                             onChange={handleName}
+                            maxLength={50}
                             required
                         />
                         <div>

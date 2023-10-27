@@ -38,6 +38,7 @@ const AddReview = ({ refreshService, serviceId }) => {
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                         cols="25" rows="3"
+                        maxLength={200}
                         required
                     />
                 </div>
