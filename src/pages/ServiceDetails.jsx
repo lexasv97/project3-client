@@ -164,7 +164,8 @@ const ServiceDetails = () => {
           </div>
 
         </div>
-        : <div className="bg-indigo-50 h-screen flex flex-col justify-center items-center">
+        : 
+        <div className="bg-indigo-50 h-screen flex flex-col justify-center items-center">
              <RotatingLines
               height={100}
               width={100}

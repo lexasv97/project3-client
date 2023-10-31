@@ -10,9 +10,6 @@ const ReviewCard = ({ review }) => {
 
     const { user } = useContext(AuthContext)
 
-    // console.log("Review line 11 =====>", review)
-    // console.log("USER line 12 =====>", user)
-
     useEffect(() => {
         AOS.init({ duration: 1000 });
     }, [])

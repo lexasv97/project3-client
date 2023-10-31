@@ -16,12 +16,6 @@ const Navbar = () => {
     return localStorage.getItem('authToken')
   }
 
-  // const getBusinessStatus = () => {
-  //   return localStorage.getItem('isBusiness')
-  // }
-
-  // const businessStatus = getBusinessStatus();
-
   const content = <>
     <div className="flex flex-col justify-between items-center absolute top-12 w-3/4 md:w-1/4 left-0 right-0 bg-gradient-to-t rounded-br-3xl from-white to-indigo-200 transition border-b border-r border-t border-slate-600 z-10">
       <ul className="text-center text-xl p-5 w-full">

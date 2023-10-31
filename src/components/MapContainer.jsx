@@ -27,11 +27,6 @@ const MapContainer = ({ lat, lng }) => {
         setMap(null)
     }, [])
 
-    //   const defaultCenter = {
-    //     lat: 25.761681,
-    //     lng: -80.191788
-    //   };
-
     return (
         // <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
         <GoogleMap
